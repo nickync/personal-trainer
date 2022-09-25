@@ -14,10 +14,17 @@ class App extends Component {
   }
 
   addTrainer = (trainer) => {
-    this.setState(prevState => ({
-      trainers : [...prevState.trainers, trainer]
-    }))
-    console.log(this.state.trainers.length)
+    if (trainer.length == 'undefined'){
+      this.setState(prevState => ({
+        trainers : [...prevState.trainers, trainer]
+      }))
+    } else {
+      for (let i=0; i<trainer.length; i++){
+        this.setState(prevState => ({
+          trainers : [...prevState.trainers, trainer[i]]
+        }))
+      }
+    }
   }
   
 
@@ -31,7 +38,7 @@ class App extends Component {
             <Routes>
             
               <Route path = "all" element={<ListAllTrainer />} />   
-              <Route path='/' element={[<MainPageComponent onSubmit={this.addTrainer}/>, 
+              <Route path='/' element={[<MainPageComponent key={Math.random()} onSubmit={this.addTrainer}/>, 
                                         <GenerateAllCards key={Math.random()} trainers={this.state.trainers}/>]} /> 
             </Routes>
             </div>

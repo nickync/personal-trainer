@@ -3,9 +3,6 @@ package com.red.trainer.controller;
 import com.red.trainer.model.Trainer;
 import com.red.trainer.repository.TrainerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
