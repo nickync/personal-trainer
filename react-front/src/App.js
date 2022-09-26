@@ -5,8 +5,11 @@ import ListAllTrainer from './Component/ListAllTrainer';
 import FooterComponent from './Component/FooterComponent';
 import {Route, Routes, BrowserRouter as Router} from 'react-router-dom'
 import MainPageComponent from './Component/MainPageComponent';
-import { Component } from 'react';
+import { Component, createContext, useContext } from 'react';
 import GenerateAllCards from './Component/GenerateAllCards';
+import LoginInfomation from './Component/LoginInfomation';
+
+const LoginInfo = createContext([]);
 
 class App extends Component {
   state = {
@@ -32,6 +35,7 @@ class App extends Component {
     
     return (
       <div>
+        <LoginInfo.Provider>
         <Router>
           <HeaderComponent />
             <div className='container'>
@@ -44,6 +48,7 @@ class App extends Component {
             </div>
           <FooterComponent />
         </Router>
+        </LoginInfo.Provider>
       </div>
     );
   }
