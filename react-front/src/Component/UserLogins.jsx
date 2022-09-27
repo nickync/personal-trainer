@@ -1,5 +1,4 @@
-import React, { createContext } from "react";
+import { createContext } from "react";
 
-const UserLogin = createContext({admin: false});
-
+const UserLogin = createContext(true);
 export default UserLogin;

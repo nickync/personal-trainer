@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 import TrainerService from '../services/TrainerService'
-import Card from 'react-bootstrap/Card'
-import TrainerCard from './TrainerCard'
 import GenerateAllCards from './GenerateAllCards'
 
 export default class ListAllTrainer extends Component {

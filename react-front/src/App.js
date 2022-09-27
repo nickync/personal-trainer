@@ -5,9 +5,10 @@ import ListAllTrainer from './Component/ListAllTrainer';
 import FooterComponent from './Component/FooterComponent';
 import {Route, Routes, BrowserRouter as Router} from 'react-router-dom'
 import MainPageComponent from './Component/MainPageComponent';
-import { Component, createContext, useContext } from 'react';
+import { Component } from 'react';
 import GenerateAllCards from './Component/GenerateAllCards';
 import UserLogin from './Component/UserLogins';
+import AddTrainerComponent from './Component/AddTrainerComponent';
 
 class App extends Component {
   state = {
@@ -17,7 +18,7 @@ class App extends Component {
   
 
   addTrainer = (trainer) => {
-    if (trainer.length == 'undefined'){
+    if (trainer.length === 'undefined'){
       this.setState(prevState => ({
         trainers : [...prevState.trainers, trainer]
       }))
@@ -32,12 +33,9 @@ class App extends Component {
   
 
   render() {
-
-    const value = false;
-    
     return (
       <div>
-        <UserLogin.Provider value={value}>
+        <UserLogin.Provider value={true}>
           <Router>
             <HeaderComponent />
               <div className='container'>
@@ -46,6 +44,8 @@ class App extends Component {
                 <Route path = "all" element={<ListAllTrainer />} />   
                 <Route path='/' element={[<MainPageComponent key={Math.random()} onSubmit={this.addTrainer}/>, 
                                           <GenerateAllCards key={Math.random()} trainers={this.state.trainers}/>]} /> 
+
+                <Route path='/add' element={<AddTrainerComponent />} />
               </Routes>
               </div>
             <FooterComponent />

@@ -1,3 +1,4 @@
+import { upload } from '@testing-library/user-event/dist/upload'
 import React, { Component } from 'react'
 
 export default class AddTrainerComponent extends Component {
@@ -14,8 +15,7 @@ export default class AddTrainerComponent extends Component {
             <label>Years of experience</label>
             <input></input>
             <label>Photo</label>
-            <input></input>
-
+            <input type="file" accept="image/png, image/jpeg"></input>
         </form>
       </div>
     )

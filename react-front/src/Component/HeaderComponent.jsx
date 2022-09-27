@@ -1,13 +1,11 @@
 import React, { Component } from 'react'
-import UserLogin from './UserLogins'
+import AddTrainerButtonComponent from './AddTrainerButtonComponent';
 
 export default class HeaderComponent extends Component {
-
   
   render() {
     return (
       <div>
-        <UserLogin.Consumer>
           <header>
               <nav className='navbar navbar-nav bg-dark bg-gradient flex-row justify-content-space-between'>
                   <div className='navbar-nav flex-row align-items-space-between'>
@@ -18,12 +16,11 @@ export default class HeaderComponent extends Component {
                   <div className="navbar-nav flex-row justify-content-space-between">
                       <a className="nav-item nav-link active text-info px-2" href="/">Home</a>
                       <a className="nav-item nav-link text-info px-2" href="/all">All Trainers</a>
-                      <a className="nav-item nav-link text-info px-2" href="#">Pricing</a>
-                      <a className="nav-item nav-link text-info  px-2" href="#">Add trainer</a>
+                      <a className="nav-item nav-link text-info px-2" href="/add">Login</a>
+                      <AddTrainerButtonComponent />
                   </div>
               </nav>
           </header>
-        </UserLogin.Consumer>
       </div>
     )
   }
