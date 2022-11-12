@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import AddTrainerComponent from './AddTrainerComponent'
 
 export default class HeaderComponent extends Component {
   render() {
@@ -15,7 +16,8 @@ export default class HeaderComponent extends Component {
                     <a className="nav-item nav-link active text-info px-2" href="/">Home</a>
                     <a className="nav-item nav-link text-info px-2" href="/all">All Trainers</a>
                     <a className="nav-item nav-link text-info px-2" href="#">Pricing</a>
-                    <a className="nav-item nav-link text-info  px-2 disabled" href="#">Disabled</a>
+                    {/* <a className="nav-item nav-link text-info  px-2 disabled" href="#">Disabled</a> */}
+                    <AddTrainerComponent />
                 </div>
             </nav>
         </header>

@@ -9,8 +9,6 @@ import { Component, createContext, useContext } from 'react';
 import GenerateAllCards from './Component/GenerateAllCards';
 import LoginInfomation from './Component/LoginInfomation';
 
-const LoginInfo = createContext([]);
-
 class App extends Component {
   state = {
      trainers: [],
@@ -35,7 +33,7 @@ class App extends Component {
     
     return (
       <div>
-        <LoginInfo.Provider>
+        {/* <LoginInfo.Provider> */}
         <Router>
           <HeaderComponent />
             <div className='container'>
@@ -48,7 +46,7 @@ class App extends Component {
             </div>
           <FooterComponent />
         </Router>
-        </LoginInfo.Provider>
+        {/* </LoginInfo.Provider> */}
       </div>
     );
   }
