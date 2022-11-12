@@ -1,6 +1,7 @@
 package com.red.trainer.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "trainers")
@@ -8,16 +9,17 @@ public class Trainer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Column(name = "first_name")
+    @Column(name = "first_name", nullable = false)
     private String firstName;
-    @Column(name = "last_name")
+    @Column(name = "last_name", nullable = false)
+    @NotEmpty
     private String lastName;
     @Column(name = "years_exp")
     private int years;
     @Column(name = "age")
     private int age;
     @Column(name = "image_url")
-    private String imageUrl;
+    private String image;
 
     public Trainer(){
 
@@ -28,7 +30,7 @@ public class Trainer {
         this.lastName = lastName;
         this.years = years;
         this.age = age;
-        this.imageUrl = imageUrl;
+        this.image = imageUrl;
     }
 
     public long getId() {
@@ -71,11 +73,11 @@ public class Trainer {
         this.age = age;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public String getImage() {
+        return image;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setImageUrl(String image) {
+        this.image = image;
     }
 }

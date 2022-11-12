@@ -1,9 +1,7 @@
-import axios from 'axios';
 import React, { Component } from 'react'
 import { InputGroup } from 'react-bootstrap'
 import { Form } from 'react-bootstrap'
 import TrainerService from '../services/TrainerService';
-import GenerateAllCards from './GenerateAllCards';
 
 export default class MainPageComponent extends Component {
     state = {

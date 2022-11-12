@@ -1,11 +1,11 @@
 import axios from "axios";
 
-const TRAINER_API_URL = "http://localhost:8080/api/all";
+const TRAINER_API_URL = "http://localhost:8080/api/";
 
 class TrainerService{
     
     getAllTrainer() {
-        return axios.get(TRAINER_API_URL);
+        return axios.get(TRAINER_API_URL + "all");
     }
 
     searchByName(name) {
@@ -19,6 +19,11 @@ class TrainerService{
         console.log(url)
 
         return axios.get(url);
+    }
+
+    addTrainer(trainer){
+        return axios.post(TRAINER_API_URL + "add", trainer)
+        
     }
 }
 
