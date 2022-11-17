@@ -3,7 +3,7 @@ package com.personaltrainer.pt.Model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Trainer")
+@Table(name = "trainer")
 public class Trainer {
 
     @Id
@@ -19,6 +19,8 @@ public class Trainer {
     @Column(name = "age")
     private int age;
 
+    @Column(name = "price")
+    private double price;
     @Column(name = "location")
     private String location;
 
@@ -30,6 +32,25 @@ public class Trainer {
 
     @Column(name = "background")
     private String background;
+
+    @Column(name = "username", nullable = false)
+    String username;
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
     public Trainer() {
 
