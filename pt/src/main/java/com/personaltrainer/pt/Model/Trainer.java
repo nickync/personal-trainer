@@ -1,4 +1,4 @@
-package Model;
+package com.personaltrainer.pt.Model;
 
 import javax.persistence.*;
 
@@ -36,6 +36,7 @@ public class Trainer {
     }
 
     public Trainer(Long id, String firstName, String lastName, int age, String location, int yearsOfExperience, String email, String background) {
+        super();
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
