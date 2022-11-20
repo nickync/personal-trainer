@@ -5,7 +5,6 @@ export default function TrainerCard({trainer}) {
     const navigate = useNavigate();
     
     const handleClickDetails = () => {
-        
         navigate(`/details/${trainer.username}`)
     }
 
