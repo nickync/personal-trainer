@@ -5,7 +5,10 @@ function Header() {
   return (
     <Nav variant="tabs" defaultActiveKey="/home">
       <Nav.Item>
-        <Nav.Link href="#">Home</Nav.Link>
+        <Nav.Link href="home">Home</Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link href="/trainers">Find Trainers</Nav.Link>
       </Nav.Item>
       <Nav.Item>
         <Nav.Link href="#">Profile</Nav.Link>
