@@ -4,9 +4,9 @@ import { useNavigate } from 'react-router-dom'
 export default function TrainerCard({trainer}) {
     const navigate = useNavigate();
     
-    const handleClickDetails = (event, username) => {
-        event.preventDefault()
-        navigate(`/details/`, {state: {username: username}})
+    const handleClickDetails = () => {
+        
+        navigate(`/details/${trainer.username}`)
     }
 
     return (
