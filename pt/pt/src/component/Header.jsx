@@ -1,7 +1,7 @@
 import React from 'react'
 import { Nav } from 'react-bootstrap';
 
-function Header() {
+function Header({login}) {
   return (
     <Nav variant="tabs" defaultActiveKey="/home">
       <Nav.Item>
@@ -11,10 +11,10 @@ function Header() {
         <Nav.Link href="/trainers">Find Trainers</Nav.Link>
       </Nav.Item>
       <Nav.Item>
-        <Nav.Link href="#">Profile</Nav.Link>
+        {login ? <Nav.Link href="/profile">Profile</Nav.Link> : ''}
       </Nav.Item>
       <Nav.Item>
-        <Nav.Link href="#">Manage</Nav.Link>
+        {login ? <Nav.Link href="#">Manage</Nav.Link> : <Nav.Link href="/login">Login</Nav.Link> }
       </Nav.Item>
     </Nav>
   )

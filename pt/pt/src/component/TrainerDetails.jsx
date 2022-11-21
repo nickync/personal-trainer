@@ -10,7 +10,6 @@ export default function TrainerDetails() {
     console.log(username)
     const [trainer, setTrainer] = useState([])
     
-
     console.log(trainer)
     useEffect(() => {
         TrainerService.getTrainerByUsername(username).then((res)=>{
