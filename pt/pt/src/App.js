@@ -28,8 +28,12 @@ function App() {
             <Route path='/login' element={<Login />} />
             <Route path='/home' element={<Home />} />
             <Route path='/trainers' element={<TrainerList />} />
+<<<<<<< HEAD
             <Route path='/details/:username' element={<TrainerDetails />} />
             <Route path='/profile' element={<TrainerProfile />} />
+=======
+            <Route path="/details/:username" element={<TrainerDetails />} />
+>>>>>>> parent of 8ee3de1 (trainer details page)
           </Routes>
         </div>
       </Router>
