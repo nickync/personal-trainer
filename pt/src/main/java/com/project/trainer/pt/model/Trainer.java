@@ -20,6 +20,9 @@ public class Trainer {
     @Column(name = "role")
     private String role;
 
+    @Column
+    private long rating;
+
     public Trainer() {
     }
 
@@ -69,5 +72,13 @@ public class Trainer {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public long getRating() {
+        return rating;
+    }
+
+    public void setRating(long rating) {
+        this.rating = rating;
     }
 }
