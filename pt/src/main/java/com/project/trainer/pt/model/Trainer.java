@@ -23,6 +23,17 @@ public class Trainer {
     @Column
     private long rating;
 
+    @Column(length = 1000)
+    private String img;
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
+
     public Trainer() {
     }
 

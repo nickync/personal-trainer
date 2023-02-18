@@ -11,7 +11,7 @@ export default function Home() {
     const getTrainers = () => {
         getAllTrainers().then(res => {
             setTrainers(res.data)
-            console.log(res.data)
+    
         }).catch(err => {
             console.log(err)
         })
@@ -25,13 +25,13 @@ export default function Home() {
             <div className='col-sm-6 fst-italic'>Our Top Trainers...</div>
         </div>
         {trainers
-            // .filter(trainer => trainer.rating > 3)
+            .filter(trainer => trainer.rating > 3)
             .map(trainer => 
                 <div className='p-2 mt-5 mb-5' key={trainer.id}>
                     <div className='row'>
                         <div className='col-lg-4'><h2 className='text-gray fw-bolder'>{trainer.firstName.toUpperCase() + ' ' + trainer.lastName.toUpperCase()}</h2></div>
                         <div className='col-lg-4 text-start'>{trainer.rating.toFixed(2)}</div>
-                        <div className='col-lg-4'></div>
+                        <div className='col-lg-4'><img src={trainer.img} className="img-thumbnail rounded" width={'200px'}/></div>
                     </div>
                     <div className='row'>
                         <div className='col-lg-1'></div>
