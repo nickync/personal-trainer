@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { Card } from 'react-bootstrap';
 import { getAllTrainers } from './api/ApiService'
 
 export default function TrainerComponent() {

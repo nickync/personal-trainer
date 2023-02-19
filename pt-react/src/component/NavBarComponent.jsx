@@ -29,9 +29,9 @@ export default function NavBarComponent() {
                 </button>
                 <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div className="navbar-nav">
-                        <Nav.Link onClick={homePage} className={location.pathname == '/' ? 'nav-link active fw-bolder text-info' : 'nav-link'} aria-current='page'>Home</Nav.Link>
-                        <Nav.Link onClick={trainersPage} className={location.pathname == '/trainers' ? 'nav-link active fw-bolder text-info' : 'nav-link'} >Our Trainers</Nav.Link>
-                        <Nav.Link onClick={loginPage} className={location.pathname == '/login' ? 'nav-link active fw-bolder text-info' : 'nav-link'} >Login</Nav.Link>
+                        <Nav.Link onClick={homePage} className={location.pathname === '/' ? 'nav-link active fw-bolder text-info' : 'nav-link'} aria-current='page'>Home</Nav.Link>
+                        <Nav.Link onClick={trainersPage} className={location.pathname === '/trainers' ? 'nav-link active fw-bolder text-info' : 'nav-link'} >Our Trainers</Nav.Link>
+                        <Nav.Link onClick={loginPage} className={location.pathname === '/login' ? 'nav-link active fw-bolder text-info' : 'nav-link'} >Login</Nav.Link>
                         <Nav.Link className="nav-link disabled" href="#" tabIndex="-1" aria-disabled="true">Disabled</Nav.Link>
                     </div>
                 </div>

@@ -5,6 +5,7 @@ import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
+import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -23,6 +24,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.jdbc.JdbcDaoImpl;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.jwt.JwtEncoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
@@ -46,19 +48,20 @@ public class JwtSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity, HandlerMappingIntrospector introspector) throws Exception {
         return httpSecurity
                 .authorizeHttpRequests(auth -> auth
-//                        .requestMatchers("/trainers", "/h2-console", "/h2-console/**").permitAll()
-//                        .requestMatchers("/login").hasRole("CUSTOMER")
-//                        .requestMatchers(HttpMethod.OPTIONS, "/**")
-//                        .permitAll()
-
-                        .anyRequest().permitAll()
+                        .requestMatchers("/trainers").permitAll()
+                        .requestMatchers(PathRequest.toH2Console()).permitAll()
+                        .requestMatchers("/login").hasRole("CUSTOMER")
+                        .requestMatchers(HttpMethod.OPTIONS, "/**")
+                        .permitAll()
+                        .anyRequest()
+                        .authenticated()
                         )
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-//                .oauth2ResourceServer(
-//                        OAuth2ResourceServerConfigurer::jwt
-//                )
+                .oauth2ResourceServer(
+                        OAuth2ResourceServerConfigurer::jwt
+                )
                 .httpBasic(Customizer.withDefaults())
                 .headers(header -> header
                         .frameOptions().sameOrigin())
@@ -120,7 +123,20 @@ public class JwtSecurityConfig {
     }
     @Bean
     public UserDetailsService userDetailsService(DataSource dataSource){
+        var user = User.withUsername("user")
+                .password("password")
+                .passwordEncoder(str -> passwordEncoder().encode(str))
+                .roles("USER")
+                .build();
+
         var jdbcUserDetailsManager = new JdbcUserDetailsManager(dataSource);
+        jdbcUserDetailsManager.createUser(user);
+
         return jdbcUserDetailsManager;
+    }
+
+    @Bean
+    public BCryptPasswordEncoder passwordEncoder(){
+        return new BCryptPasswordEncoder();
     }
 }
