@@ -3,6 +3,7 @@ package com.project.trainer.pt.model;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "_user")
 public class User {
 
     @Id

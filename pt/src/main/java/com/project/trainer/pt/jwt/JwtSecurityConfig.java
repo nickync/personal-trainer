@@ -8,6 +8,11 @@ import com.nimbusds.jose.proc.SecurityContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.ProviderManager;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -15,13 +20,18 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.annotation.web.configurers.oauth2.server.resource.OAuth2ResourceServerConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.jdbc.JdbcDaoImpl;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.jwt.JwtEncoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtEncoder;
+import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
 
+import javax.sql.DataSource;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.interfaces.RSAPublicKey;
@@ -36,18 +46,19 @@ public class JwtSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity, HandlerMappingIntrospector introspector) throws Exception {
         return httpSecurity
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/trainers").permitAll()
-                        .requestMatchers("/login").hasRole("CUSTOMER")
-                        .requestMatchers(HttpMethod.OPTIONS, "/**")
-                        .permitAll()
-                        .anyRequest()
-                        .authenticated())
+//                        .requestMatchers("/trainers", "/h2-console", "/h2-console/**").permitAll()
+//                        .requestMatchers("/login").hasRole("CUSTOMER")
+//                        .requestMatchers(HttpMethod.OPTIONS, "/**")
+//                        .permitAll()
+
+                        .anyRequest().permitAll()
+                        )
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .oauth2ResourceServer(
-                        OAuth2ResourceServerConfigurer::jwt
-                )
+//                .oauth2ResourceServer(
+//                        OAuth2ResourceServerConfigurer::jwt
+//                )
                 .httpBasic(Customizer.withDefaults())
                 .headers(header -> header
                         .frameOptions().sameOrigin())
@@ -61,7 +72,9 @@ public class JwtSecurityConfig {
             keyPairGenerator.initialize(2048);
             return keyPairGenerator.generateKeyPair();
         } catch (Exception ex){
-            throw new RuntimeException(ex);
+            throw new IllegalStateException(
+                    "Unable to generate RSA Kay Pair", ex
+            );
         }
     }
 
@@ -89,5 +102,25 @@ public class JwtSecurityConfig {
     @Bean
     public JwtEncoder jwtEncoder(JWKSource<SecurityContext> jwkSource){
         return new NimbusJwtEncoder(jwkSource);
+    }
+
+    @Bean
+    public AuthenticationManager authenticationManager(UserDetailsService userDetailsService){
+        var authenticationProvider = new DaoAuthenticationProvider();
+        authenticationProvider.setUserDetailsService(userDetailsService);
+        return new ProviderManager(authenticationProvider);
+    }
+
+    @Bean
+    public DataSource dataSource(){
+        return new EmbeddedDatabaseBuilder()
+                .setType(EmbeddedDatabaseType.H2)
+                .addScript(JdbcDaoImpl.DEFAULT_USER_SCHEMA_DDL_LOCATION)
+                .build();
+    }
+    @Bean
+    public UserDetailsService userDetailsService(DataSource dataSource){
+        var jdbcUserDetailsManager = new JdbcUserDetailsManager(dataSource);
+        return jdbcUserDetailsManager;
     }
 }

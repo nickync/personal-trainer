@@ -13,15 +13,15 @@ public class PtApplication {
 		SpringApplication.run(PtApplication.class, args);
 	}
 
-	@Bean
-	public WebMvcConfigurer configurer(){
-		return new WebMvcConfigurer() {
-			public void addCorsMappings(CorsRegistry registry){
-				registry.addMapping("/**")
-						.allowedMethods("*")
-						.allowedOrigins("http://localhost:3000");
-			}
-		};
-	}
+//	@Bean
+//	public WebMvcConfigurer configurer(){
+//		return new WebMvcConfigurer() {
+//			public void addCorsMappings(CorsRegistry registry){
+//				registry.addMapping("/**")
+//						.allowedMethods("*")
+//						.allowedOrigins("http://localhost:3000");
+//			}
+//		};
+//	}
 
 }
