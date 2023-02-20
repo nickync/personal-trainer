@@ -25,6 +25,8 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.jdbc.JdbcDaoImpl;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.jwt.JwtEncoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
@@ -48,9 +50,8 @@ public class JwtSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity, HandlerMappingIntrospector introspector) throws Exception {
         return httpSecurity
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/trainers").permitAll()
+                        .requestMatchers("/trainers", "/authenticate", "/sign-up").permitAll()
                         .requestMatchers(PathRequest.toH2Console()).permitAll()
-                        .requestMatchers("/login").hasRole("CUSTOMER")
                         .requestMatchers(HttpMethod.OPTIONS, "/**")
                         .permitAll()
                         .anyRequest()
@@ -123,9 +124,11 @@ public class JwtSecurityConfig {
     }
     @Bean
     public UserDetailsService userDetailsService(DataSource dataSource){
+        PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
         var user = User.withUsername("user")
-                .password("password")
-                .passwordEncoder(str -> passwordEncoder().encode(str))
+                .password(encoder.encode("password"))
+//        https://www.baeldung.com/spring-security-5-default-password-encoder
+//                .passwordEncoder(str -> passwordEncoder().encode(str))
                 .roles("USER")
                 .build();
 
@@ -135,8 +138,4 @@ public class JwtSecurityConfig {
         return jdbcUserDetailsManager;
     }
 
-    @Bean
-    public BCryptPasswordEncoder passwordEncoder(){
-        return new BCryptPasswordEncoder();
-    }
 }
