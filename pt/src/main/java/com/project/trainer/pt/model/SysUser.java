@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "_user")
-public class User {
+public class SysUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
@@ -19,7 +19,7 @@ public class User {
     @Column
     private String role;
 
-    public User() {
+    public SysUser() {
     }
 
     public long getUserId() {

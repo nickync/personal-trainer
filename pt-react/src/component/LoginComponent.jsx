@@ -12,18 +12,17 @@ export default function LoginComponent() {
 
     const updateUsername = (event) => {
         setUsername(event.target.value)
-        console.log(username)
     }
 
     const updatePassword = (event) => {
         setPassword(event.target.value)
-        console.log(password)
     }
 
     const handleSubmit = async (event) => {
         event.preventDefault()
         if (await authContext.login(username, password)){
-            navigate('/')
+            navigate('/details')
+            
         } else {
             console.log('errr')
         }

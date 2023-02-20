@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import Home from './component/Home';
 import NavBarComponent from './component/NavBarComponent';
@@ -7,10 +6,24 @@ import TrainerComponent from './component/TrainerComponent';
 import LoginComponent from './component/LoginComponent';
 import AuthProvider from './component/AuthContext';
 import SignupComponent from './component/SignupComponent';
+import CustomerDetails from './component/CustomerDetails';
+import { Navigate } from 'react-router-dom';
+import { useAuth } from './component/AuthContext';
 
+function AuthenticatedRoute({ children }){
+  const authContext = useAuth()
+  
+  if (authContext.isAuthenticated){
+      return children
+  }
+  return <Navigate to='/' />
+}
 
 
 function App() {
+
+  const authContext = useAuth()
+
   return (
     <AuthProvider>
       <Router>
@@ -20,6 +33,11 @@ function App() {
           <Route path='/trainers' element = {<TrainerComponent /> } />
           <Route path='/login' element = {<LoginComponent />} />
           <Route path='/sign-up' element = {<SignupComponent />} />
+          <Route path='/details' element = {
+            <AuthenticatedRoute>
+              {authContext.role == <CustomerDetails />}
+            </AuthenticatedRoute>
+          } />
         </Routes>
       </Router>
     </AuthProvider>

@@ -1,9 +1,13 @@
 import React from 'react'
 import { Nav } from 'react-bootstrap'
 import { useLocation, useNavigate } from 'react-router-dom'
+import { useAuth } from './AuthContext'
 
 export default function NavBarComponent() {
     // get url
+
+    const authContext = useAuth()
+
     const location = useLocation()
 
     const navigate = useNavigate()
@@ -19,6 +23,15 @@ export default function NavBarComponent() {
     const loginPage = () => {
         navigate('/login')
     }
+
+    const detailsPage = () => {
+        navigate('/details')
+    }
+
+    const logout = () => {
+        authContext.logout()
+        navigate('/')
+    }
     
     return (
         <nav className="navbar sticky-top navbar-expand-lg navbar-dark bg-dark bg-gradient">
@@ -31,10 +44,15 @@ export default function NavBarComponent() {
                     <div className="navbar-nav">
                         <Nav.Link onClick={homePage} className={location.pathname === '/' ? 'nav-link active fw-bolder text-info' : 'nav-link'} aria-current='page'>Home</Nav.Link>
                         <Nav.Link onClick={trainersPage} className={location.pathname === '/trainers' ? 'nav-link active fw-bolder text-info' : 'nav-link'} >Our Trainers</Nav.Link>
-                        <Nav.Link onClick={loginPage} className={location.pathname === '/login' ? 'nav-link active fw-bolder text-info' : 'nav-link'} >Login</Nav.Link>
-                        <Nav.Link className="nav-link disabled" href="#" tabIndex="-1" aria-disabled="true">Disabled</Nav.Link>
+                        
+                        {authContext.role === null ? 
+                            <Nav.Link onClick={loginPage} className={location.pathname === '/login' ? 'nav-link active fw-bolder text-info' : 'nav-link'} >Login</Nav.Link> 
+                            : 
+                            <Nav.Link onClick={detailsPage} className={location.pathname === '/details' ? 'nav-link active fw-bolder text-info' : 'nav-link'} >Profile</Nav.Link>
+                            }
                     </div>
                 </div>
+                {authContext.isAuthenticated ? <button className='btn btn-warning' onClick={logout}>Log out</button> : ''}
             </div>
         </nav>
   )
