@@ -31,7 +31,7 @@ export default function Home() {
                     <div className='row'>
                         <div className='col-lg-4'><h2 className='text-gray fw-bolder'>{trainer.firstName.toUpperCase() + ' ' + trainer.lastName.toUpperCase()}</h2></div>
                         <div className='col-lg-4 text-start'>{trainer.rating.toFixed(2)}</div>
-                        <div className='col-lg-4'><img src={trainer.img} className="img-thumbnail rounded" width={'200px'}/></div>
+                        <div className='col-lg-4'><img src={trainer.img} className="img-thumbnail rounded" width={'200px'} alt='thumb'/></div>
                     </div>
                     <div className='row'>
                         <div className='col-lg-1'></div>

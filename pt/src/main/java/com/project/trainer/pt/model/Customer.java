@@ -1,6 +1,7 @@
 package com.project.trainer.pt.model;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.ColumnDefault;
 
 @Entity
 public class Customer {
@@ -28,6 +29,10 @@ public class Customer {
 
     @Column
     private long height;
+
+    @Column
+    @ColumnDefault("-1")
+    private long trainerId;
 
     public Customer() {
     }
@@ -94,5 +99,13 @@ public class Customer {
 
     public void setHeight(long height) {
         this.height = height;
+    }
+
+    public long getTrainerId() {
+        return trainerId;
+    }
+
+    public void setTrainerId(long trainerId) {
+        this.trainerId = trainerId;
     }
 }

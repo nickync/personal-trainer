@@ -6,4 +6,4 @@ insert into trainer (id, first_name, last_name, role, bio, rating, img, price) V
 insert into trainer (id, first_name, last_name, role, bio, rating, img, price) VALUES ('4', 'toby', 'dimon', 'TRAINER', 'CEO', 2, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvEmbAzzleQ9lakE0nuGCl6e-S9QInt1ZkaQ&usqp=CAU', 100.00);
 insert into trainer (id, first_name, last_name, role, bio, rating, img, price) VALUES ('5', 'tom', 'dimon', 'TRAINER', 'CEO', 5, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTN8Y6IKdRegpmGDa7EX-haO50vYiFx07gA3g&usqp=CAU', 100.00);
 
-insert into customer (id, first_name, last_name, role, goal, age, height, weight) VALUES ('22', 'dead', 'pool', 'CUSTOMER', 'lost weight', 33, 172, 150);
+insert into customer (id, first_name, last_name, role, goal, age, height, weight, trainer_id) VALUES ('22', 'dead', 'pool', 'CUSTOMER', 'lost weight', 33, 172, 150, -1);

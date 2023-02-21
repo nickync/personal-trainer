@@ -1,6 +1,6 @@
 import { createContext, useContext, useState } from "react";
 import { apiClient } from "./api/ApiClient";
-import { getRoleService, getTrainerService, getUserId } from "./api/ApiService";
+import { getRoleService, getUserId } from "./api/ApiService";
 import { jwtAuthenticationService } from "./api/AuthenticationApi";
 
 export const AuthContext = createContext();
@@ -17,8 +17,6 @@ export default function AuthProvider({ children }){
     const [role, setRole] = useState(null)
 
     const [id, setId] = useState(null)
-
-    const [user, setUser] = useState(null)
 
     async function login(username, password){
         try{
@@ -45,10 +43,6 @@ export default function AuthProvider({ children }){
                 await getUserId(username).then(res => {
                     setId(res.data)
                 })
-                
-                // await getTrainerService(id).then(res => {
-                //     setUser(res.data)
-                // })
 
                 return true
             } else {
@@ -73,16 +67,11 @@ export default function AuthProvider({ children }){
         setToken(null)
         setUsername(null)
         setRole(null)
-    }
-
-    function getTrainer(){
-        getTrainerService(id).then(res => {
-            setUser(res.data)
-        })
+        setId(null)
     }
 
     return (
-        <AuthContext.Provider value={{ isAuthenticated, username, token, role, id, login, logout, user }}>
+        <AuthContext.Provider value={{ isAuthenticated, username, token, role, id, login, logout}}>
             {children}
         </AuthContext.Provider>
     )
