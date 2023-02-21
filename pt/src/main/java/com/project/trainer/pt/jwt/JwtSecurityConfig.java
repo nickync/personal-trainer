@@ -51,7 +51,7 @@ public class JwtSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity, HandlerMappingIntrospector introspector) throws Exception {
         return httpSecurity
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/trainers", "/authenticate", "/sign-up", "/getRole/**").permitAll()
+                        .requestMatchers("/trainers", "/authenticate", "/sign-up").permitAll()
                         .requestMatchers(PathRequest.toH2Console()).permitAll()
                         .requestMatchers(HttpMethod.OPTIONS, "/**")
                         .permitAll()
@@ -126,16 +126,20 @@ public class JwtSecurityConfig {
     @Bean
     public UserDetailsService userDetailsService(DataSource dataSource){
         PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-        var user = User.withUsername("user")
-                .password(encoder.encode("password"))
+        var user = User.withUsername("customer")
+                .password(encoder.encode("1"))
 //        https://www.baeldung.com/spring-security-5-default-password-encoder
 //                .passwordEncoder(str -> passwordEncoder().encode(str))
-                .roles("USER")
+                .roles("CUSTOMER")
+                .build();
+        var trainer = User.withUsername("trainer")
+                .password(encoder.encode("1"))
+                .roles("TRAINER")
                 .build();
 
         var jdbcUserDetailsManager = new JdbcUserDetailsManager(dataSource);
         jdbcUserDetailsManager.createUser(user);
-
+        jdbcUserDetailsManager.createUser(trainer);
         return jdbcUserDetailsManager;
     }
 

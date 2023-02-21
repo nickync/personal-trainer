@@ -24,8 +24,12 @@ export default function NavBarComponent() {
         navigate('/login')
     }
 
-    const detailsPage = () => {
-        navigate('/details')
+    const trainerPage = () => {
+        navigate('/trainer/details')
+    }
+
+    const customerPage = () => {
+        navigate('/customer/details')
     }
 
     const logout = () => {
@@ -47,8 +51,11 @@ export default function NavBarComponent() {
                         
                         {authContext.role === null ? 
                             <Nav.Link onClick={loginPage} className={location.pathname === '/login' ? 'nav-link active fw-bolder text-info' : 'nav-link'} >Login</Nav.Link> 
-                            : 
-                            <Nav.Link onClick={detailsPage} className={location.pathname === '/details' ? 'nav-link active fw-bolder text-info' : 'nav-link'} >Profile</Nav.Link>
+                        : authContext.role === 'TRAINER' ?
+                            <Nav.Link onClick={trainerPage} className={location.pathname === '/details' ? 'nav-link active fw-bolder text-info' : 'nav-link'} >Profile</Nav.Link>
+                            :
+                            <Nav.Link onClick={customerPage} className={location.pathname === '/details' ? 'nav-link active fw-bolder text-info' : 'nav-link'} >Profile</Nav.Link>
+
                             }
                     </div>
                 </div>

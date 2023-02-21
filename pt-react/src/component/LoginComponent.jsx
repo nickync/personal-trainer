@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button, Form, Nav } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
+import { getRoleService } from './api/ApiService'
 import { useAuth } from './AuthContext'
 
 export default function LoginComponent() {
@@ -8,7 +9,6 @@ export default function LoginComponent() {
     const [password, setPassword] = useState('')
     const navigate = useNavigate()
     const authContext = useAuth()
-
 
     const updateUsername = (event) => {
         setUsername(event.target.value)
@@ -21,7 +21,12 @@ export default function LoginComponent() {
     const handleSubmit = async (event) => {
         event.preventDefault()
         if (await authContext.login(username, password)){
-            navigate('/details')
+            let role = null
+            await getRoleService(username).then(res => {
+                role = res.data
+            })
+            console.log(role)
+            role === 'TRAINER' ? navigate('/trainer/details') : navigate('/customer/details')
             
         } else {
             console.log('errr')

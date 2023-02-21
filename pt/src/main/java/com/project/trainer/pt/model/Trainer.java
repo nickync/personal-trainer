@@ -26,6 +26,9 @@ public class Trainer {
     @Column(length = 1000)
     private String img;
 
+    @Column
+    private long price;
+
     public String getImg() {
         return img;
     }
@@ -91,5 +94,13 @@ public class Trainer {
 
     public void setRating(long rating) {
         this.rating = rating;
+    }
+
+    public long getPrice() {
+        return price;
+    }
+
+    public void setPrice(long price) {
+        this.price = price;
     }
 }

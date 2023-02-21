@@ -7,6 +7,7 @@ import LoginComponent from './component/LoginComponent';
 import AuthProvider from './component/AuthContext';
 import SignupComponent from './component/SignupComponent';
 import CustomerDetails from './component/CustomerDetails';
+import TrainerDetails from './component/TrainerDetails';
 import { Navigate } from 'react-router-dom';
 import { useAuth } from './component/AuthContext';
 
@@ -22,8 +23,6 @@ function AuthenticatedRoute({ children }){
 
 function App() {
 
-  const authContext = useAuth()
-
   return (
     <AuthProvider>
       <Router>
@@ -33,9 +32,14 @@ function App() {
           <Route path='/trainers' element = {<TrainerComponent /> } />
           <Route path='/login' element = {<LoginComponent />} />
           <Route path='/sign-up' element = {<SignupComponent />} />
-          <Route path='/details' element = {
+          <Route path='/customer/details' element = {
             <AuthenticatedRoute>
-              {authContext.role == <CustomerDetails />}
+              {<CustomerDetails />}
+            </AuthenticatedRoute>
+          } />
+          <Route path='/trainer/details' element = {
+            <AuthenticatedRoute>
+              {<TrainerDetails />}
             </AuthenticatedRoute>
           } />
         </Routes>

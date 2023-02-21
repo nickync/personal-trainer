@@ -22,7 +22,6 @@ export default function SignupComponent() {
 
     const updateRole = (event) => {
         setRole(event.target.value)
-        console.log(role)
     }
 
     const handleSubmit = () => {

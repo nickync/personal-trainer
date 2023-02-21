@@ -26,5 +26,9 @@ public class UserController {
         return userRepository.findByUsername(username).getRole();
     }
 
+    @GetMapping("/getUserId/{username}")
+    public Long getUserId(@PathVariable String username){
+        return userRepository.findByUsername(username).getUserId();
+    }
 
 }

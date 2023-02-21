@@ -1,6 +1,6 @@
 import { createContext, useContext, useState } from "react";
 import { apiClient } from "./api/ApiClient";
-import { getRoleService } from "./api/ApiService";
+import { getRoleService, getTrainerService, getUserId } from "./api/ApiService";
 import { jwtAuthenticationService } from "./api/AuthenticationApi";
 
 export const AuthContext = createContext();
@@ -16,6 +16,10 @@ export default function AuthProvider({ children }){
 
     const [role, setRole] = useState(null)
 
+    const [id, setId] = useState(null)
+
+    const [user, setUser] = useState(null)
+
     async function login(username, password){
         try{
             const response = await jwtAuthenticationService(username, password)
@@ -25,11 +29,6 @@ export default function AuthProvider({ children }){
                 setIsAuthenticated(true)
                 setUsername(username)
                 setToken(jwtToken)
-                console.log(response.data)
-                await getRoleService(username).then(res => {
-                    setRole(res.data)
-                    console.log(res.data)
-                })
 
                 apiClient.interceptors.request.use(
                     (config) => {
@@ -38,6 +37,19 @@ export default function AuthProvider({ children }){
                         return config
                     }
                 )
+
+                await getRoleService(username).then(res => {
+                    setRole(res.data)
+                })
+
+                await getUserId(username).then(res => {
+                    setId(res.data)
+                })
+                
+                // await getTrainerService(id).then(res => {
+                //     setUser(res.data)
+                // })
+
                 return true
             } else {
                 setIsAuthenticated(false)
@@ -63,8 +75,14 @@ export default function AuthProvider({ children }){
         setRole(null)
     }
 
+    function getTrainer(){
+        getTrainerService(id).then(res => {
+            setUser(res.data)
+        })
+    }
+
     return (
-        <AuthContext.Provider value={{ isAuthenticated, username, token, role, login, logout }}>
+        <AuthContext.Provider value={{ isAuthenticated, username, token, role, id, login, logout, user }}>
             {children}
         </AuthContext.Provider>
     )
