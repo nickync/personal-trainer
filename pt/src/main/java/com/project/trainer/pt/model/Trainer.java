@@ -29,6 +29,14 @@ public class Trainer {
     @Column
     private long price;
 
+    @Column
+    private String motto;
+
+    @Column
+    private String background;
+
+    @Column
+    private String location;
     public String getImg() {
         return img;
     }
@@ -102,5 +110,29 @@ public class Trainer {
 
     public void setPrice(long price) {
         this.price = price;
+    }
+
+    public String getMotto() {
+        return motto;
+    }
+
+    public void setMotto(String motto) {
+        this.motto = motto;
+    }
+
+    public String getBackground() {
+        return background;
+    }
+
+    public void setBackground(String background) {
+        this.background = background;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 }

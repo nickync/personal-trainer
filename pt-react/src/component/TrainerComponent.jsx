@@ -19,10 +19,10 @@ export default function TrainerComponent() {
                 <div className="card m-3 p-1 border-secondary" style={{flexBasis:"45%"}} key={trainer.id}>
                     <img src={trainer.img} className="card-img-top" height={'100%'} alt="#"/>
                     <div className="card-body">
-                        <h5 className="card-title">{trainer.firstName.toUpperCase() + ' ' + trainer.lastName.toUpperCase() }</h5>
+                        <h5 className="card-title text-uppercase">{trainer.firstName + ' ' + trainer.lastName}</h5>
                         <p className="card-text">{trainer.bio}</p>
                         <p className='card-text'>{trainer.rating.toFixed(2)}</p>
-                        <a href="#" className="btn btn-primary">View more</a>
+                        <a href={`/trainer/information/`+trainer.id} className="btn btn-primary">View more</a>
                     </div>
                 </div>
         )}

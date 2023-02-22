@@ -7,6 +7,7 @@ import {Row, Col} from 'react-bootstrap'
 export default function TrainerDetails() {
   const authContext = useAuth()
   const [trainer, setTrainer] = useState([])
+  
   useEffect( () => {
     getTrainerService(authContext.id).then(res => {
       setTrainer(res.data)
@@ -19,7 +20,7 @@ export default function TrainerDetails() {
         <Col><img className="card-img-top" height={'100%'} alt="#" src={trainer.img}></img></Col>
         <Col>
           <Row className='justify-content-center fs-1 text-uppercase'> {trainer.firstName + " " + trainer.lastName}</Row>
-          <Row className='justify-content-center fs-4 fst-italic'> <Badge bg='dark' style={{width:'10%'}}>{trainer.bio}</Badge></Row>
+          <Row className='justify-content-center fs-4 fst-italic'> <Badge bg='dark' style={{width:'90%'}}>{trainer.bio}</Badge></Row>
           <Row className='justify-content-center' > ${trainer.price?.toFixed(2)} per hour</Row>
         </Col>
       </Row>
