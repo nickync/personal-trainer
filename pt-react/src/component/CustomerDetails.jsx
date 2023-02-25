@@ -12,15 +12,26 @@ export default function CustomerDetails() {
   useEffect( () => {
     getCustomerService(authContext.id).then(res => {
       setCustomer(res.data)
-      console.log(res.data)
     })
-    if (customer.trainerId !== -1){
-        getTrainerService(customer.trainerId).then(res => {
-            setTrainer(res.data)
-        })
-    }
-  },[authContext.id, customer.trainerId])
+   
+  },[authContext.id])
   
+  useEffect( () => {
+    if(customer.trainerId !== undefined && customer.trainerId !== -1){
+      console.log(customer.trainerId)
+      getTrainerService(customer.trainerId).then(res => {
+          setTrainer(res.data)
+      })
+    }
+  }, [customer.trainerId])
+
+  // if (customer.trainerId !== undefined && customer.trainerId !== Number(-1)){
+  //   console.log(customer.trainerId)
+  //   getTrainerService(customer.trainerId).then(res => {
+  //       setTrainer(res.data)
+  //   })
+  // }
+
   return (
     <Container className='mt-5'>
       <Row>

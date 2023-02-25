@@ -25,7 +25,6 @@ export default function LoginComponent() {
             await getRoleService(username).then(res => {
                 role = res.data
             })
-            console.log(role)
             role === 'TRAINER' ? navigate('/trainer/details') : navigate('/customer/details')
             
         } else {

@@ -2,6 +2,7 @@ import React from 'react'
 import { Nav } from 'react-bootstrap'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useAuth } from './AuthContext'
+import MessageNavbarComponent from './MessageNavbarComponent'
 
 export default function NavBarComponent() {
     // get url
@@ -36,6 +37,18 @@ export default function NavBarComponent() {
         authContext.logout()
         navigate('/')
     }
+
+    const manageClientPage = () => {
+        navigate('/trainers/manageclient')
+    }
+
+    const trainingPlanPage = () => {
+        navigate('/customers/trainingplan')
+    }
+
+    const messagingPage = () => {
+        navigate('/messaging')
+    }
     
     return (
         <nav className="navbar sticky-top navbar-expand-lg navbar-dark bg-dark bg-gradient">
@@ -52,11 +65,21 @@ export default function NavBarComponent() {
                         {authContext.role === null ? 
                             <Nav.Link onClick={loginPage} className={location.pathname === '/login' ? 'nav-link active fw-bolder text-info' : 'nav-link'} >Login</Nav.Link> 
                         : authContext.role === 'TRAINER' ?
-                            <Nav.Link onClick={trainerPage} className={location.pathname === '/details' ? 'nav-link active fw-bolder text-info' : 'nav-link'} >Profile</Nav.Link>
-                            :
-                            <Nav.Link onClick={customerPage} className={location.pathname === '/details' ? 'nav-link active fw-bolder text-info' : 'nav-link'} >Profile</Nav.Link>
+                            <Nav.Link onClick={trainerPage} className={location.pathname === '/trainer/details' ? 'nav-link active fw-bolder text-info' : 'nav-link'} >Profile</Nav.Link>
+                        :
+                            <Nav.Link onClick={customerPage} className={location.pathname === '/customer/details' ? 'nav-link active fw-bolder text-info' : 'nav-link'} >Profile</Nav.Link>
+                        }
+                        {authContext.role === 'TRAINER' ?
+                            <Nav.Link onClick={manageClientPage} className={location.pathname === '/trainers/manageclient' ? 'nav-link active fw-bolder text-info' : 'nav-link'}>Manage Client</Nav.Link>
+                        : authContext.role === 'CUSTOMER' ? 
+                        <Nav.Link onClick={trainingPlanPage} className={location.pathname === '/customers/trainingplan' ? 'nav-link active fw-bolder text-info' : 'nav-link'}>Training Plan</Nav.Link>
+                        : ''
+                        }
 
-                            }
+                        {authContext.role ?
+                            <Nav.Link className={location.pathname === '/messaging' ? 'nav-link active fw-bolder text-info' : 'nav-link'}><MessageNavbarComponent messagingPage={messagingPage} /></Nav.Link>
+                        : ''
+                        }
                     </div>
                 </div>
                 {authContext.isAuthenticated ? <button className='btn btn-warning' onClick={logout}>Log out</button> : ''}

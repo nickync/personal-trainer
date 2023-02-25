@@ -27,6 +27,9 @@ public class Trainer {
     private String img;
 
     @Column
+    private int yearsOfExp;
+
+    @Column
     private long price;
 
     @Column
@@ -134,5 +137,13 @@ public class Trainer {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public int getYearsOfExp() {
+        return yearsOfExp;
+    }
+
+    public void setYearsOfExp(int yearsOfExp) {
+        this.yearsOfExp = yearsOfExp;
     }
 }

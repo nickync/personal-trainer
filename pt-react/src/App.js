@@ -11,6 +11,10 @@ import TrainerDetails from './component/TrainerDetails';
 import { Navigate } from 'react-router-dom';
 import { useAuth } from './component/AuthContext';
 import TrainerInformation from './component/TrainerInfomation';
+import ErrorComponent from './component/ErrorComponent';
+import ManageClientComponent from './component/ManageClientComponent';
+import TrainingPlanComponent from './component/TrainingPlanComponent';
+import MessagingComponent from './component/MessagingComponent';
 
 function AuthenticatedRoute({ children }){
   const authContext = useAuth()
@@ -34,16 +38,38 @@ function App() {
           <Route path='/login' element = {<LoginComponent />} />
           <Route path='/sign-up' element = {<SignupComponent />} />
           <Route path='/trainer/information/:id' element= {<TrainerInformation />} /> 
+          <Route path='/error' element = {<ErrorComponent />} />
+          <Route path='/trainers/manageclient' element = {
+            <AuthenticatedRoute>
+              <ManageClientComponent />
+            </AuthenticatedRoute>
+          }/>
+          
+          <Route path='/customers/trainingplan' element = {
+            <AuthenticatedRoute>
+              <TrainingPlanComponent />
+            </AuthenticatedRoute>
+          } />
+
           <Route path='/customer/details' element = {
             <AuthenticatedRoute>
               {<CustomerDetails />}
             </AuthenticatedRoute>
           } />
+
           <Route path='/trainer/details' element = {
             <AuthenticatedRoute>
               {<TrainerDetails />}
             </AuthenticatedRoute>
           } />
+
+          <Route path='/messaging' element = {
+            <AuthenticatedRoute>
+              {<MessagingComponent />}
+            </AuthenticatedRoute>
+          } />
+
+          <Route path='*' element = {<ErrorComponent />} />
         </Routes>
       </Router>
     </AuthProvider>

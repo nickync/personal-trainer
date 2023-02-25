@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 import { getAllTrainers } from './api/ApiService'
 
 export default function TrainerComponent() {
     const [trainers, setTrainers] = useState([]);
+    const navigate = useNavigate()
 
     useEffect(
         () => getTrainers,[]
@@ -13,6 +15,10 @@ export default function TrainerComponent() {
             setTrainers(res.data) 
         })
     }
+    const goInfoPage = (id) => {
+        navigate(`/trainer/information/${id}`)
+    }
+
   return (
     <div className='container-fluid text-center card-group'>
         {trainers.map(trainer => 
@@ -22,7 +28,7 @@ export default function TrainerComponent() {
                         <h5 className="card-title text-uppercase">{trainer.firstName + ' ' + trainer.lastName}</h5>
                         <p className="card-text">{trainer.bio}</p>
                         <p className='card-text'>{trainer.rating.toFixed(2)}</p>
-                        <a href={`/trainer/information/`+trainer.id} className="btn btn-primary">View more</a>
+                        <button onClick={()=>goInfoPage(trainer.id)} className="btn btn-primary">View more</button>
                     </div>
                 </div>
         )}

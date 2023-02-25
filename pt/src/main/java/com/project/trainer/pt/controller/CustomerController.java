@@ -3,7 +3,9 @@ package com.project.trainer.pt.controller;
 import com.project.trainer.pt.model.Customer;
 import com.project.trainer.pt.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,4 +19,19 @@ public class CustomerController {
     public Customer getCustomerById(@RequestParam Long id){
         return customerRepository.findById(id).orElseThrow();
     }
+
+    @PostMapping("/customers/book")
+    public HttpStatus bookTrainer(@RequestParam Long customerId, @RequestParam Long trainerId){
+        Customer customer = customerRepository.findById(customerId).get();
+
+        if (trainerId != null){
+            customer.setTrainerId(trainerId);
+            customerRepository.save(customer);
+            return HttpStatus.OK;
+        } else {
+            return HttpStatus.INTERNAL_SERVER_ERROR;
+        }
+
+    }
+
 }

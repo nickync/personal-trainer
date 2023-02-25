@@ -11,3 +11,5 @@ export const getUserId = (username) => apiClient.get('/getUserId/' + username)
 export const getTrainerService = (id) => apiClient.get('/trainers/get?id=' + id)
 
 export const getCustomerService = (id) => apiClient.get('/customers/get?id=' + id)
+
+export const bookTrainerService = (trainerId, customerId) => apiClient.post(`/customers/book?trainerId=${trainerId}&&customerId=${customerId}`)
