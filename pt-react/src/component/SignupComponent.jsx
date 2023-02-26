@@ -10,22 +10,21 @@ export default function SignupComponent() {
     const [role, setRole] = useState('')
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
-
+    const [img, setImg] = useState('https://www.nicepng.com/png/detail/14-148358_lovely-penguin-clip-art-is-penguin-profile.png')
 
     // trainer info
     const [bio, setBio] = useState('')
     const [motto, setMotto] = useState('')
     const [background, setBackground] = useState('')
     const [years, setYears] = useState(0)
+    const [location, setLocation] = useState('New York')
+    const [price, setPrice] = useState(0)
 
     // customer info
     const [age, setAge] = useState(0)
     const [weight, setWeight] = useState(0)
     const [height, setHeight] = useState(0)
     const [goal, setGoal] = useState('')
-    const [location, setLocation] = useState('')
-    const [price, setPrice] = useState(0)
-    const [img, setImg] = useState('https://www.nicepng.com/png/detail/14-148358_lovely-penguin-clip-art-is-penguin-profile.png')
 
     // UI state
     const [buttonState, setButtonState] = useState(false)
@@ -136,7 +135,7 @@ export default function SignupComponent() {
                         console.log('Fail to create trainer')
                     })
                 } else if (role === 'CUSTOMER'){
-                    let customer = {id:res.data['userId'], firstName:firstName, lastName:lastName, age:age, goal:goal, weight:weight}
+                    let customer = {id:res.data['userId'], firstName:firstName, lastName:lastName, age:age, goal:goal, weight:weight, img:img}
                     customerSignUpService(customer).then(res => {
                         navigate('/login')
                     }).catch(res => {
@@ -157,7 +156,7 @@ export default function SignupComponent() {
         <Form className='fst-italic fw-bold'>
             <Row>
                 <Col className='col-sm-4 me-5'>
-                    <Form.Group className='mb-3' controlId='username'>
+                    <Form.Group className='mb-2' controlId='username'>
                         <Form.Label>Username {usernameAlert ? <span className='text-danger fw-bolder'>Username has already been used, please use a different one.</span> :''} </Form.Label>
                         <Form.Control type='username' placeholder='Enter username' value={username} onChange={updateUsername}/>
                     </Form.Group>
@@ -273,7 +272,10 @@ export default function SignupComponent() {
                                 <Form.Label>Goal</Form.Label>
                                 <Form.Control as='textarea' size='lg' value={goal} onChange={updateGoal} />
                             </Form.Group>
-
+                            <Form.Group>
+                                <Form.Label>Image URL</Form.Label>
+                                <Form.Control type='text' placeholder={img} value={img} onChange={updateImg} />
+                            </Form.Group>
                         </div>
                     :
                         ''
