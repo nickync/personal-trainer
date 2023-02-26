@@ -20,9 +20,9 @@ export default function TrainerComponent() {
     }
 
   return (
-    <div className='container-fluid text-center card-group'>
+    <div className='container-fluid text-center justify-content-center d-flex flex-wrap'>
         {trainers.map(trainer => 
-                <div className="card m-3 p-1 border-secondary" style={{flexBasis:"45%"}} key={trainer.id}>
+                <div className="card m-3 p-1 border-secondary" style={{width:"30rem"}} key={trainer.id}>
                     <img src={trainer.img} className="card-img-top" height={'100%'} alt="#"/>
                     <div className="card-body">
                         <h5 className="card-title text-uppercase">{trainer.firstName + ' ' + trainer.lastName}</h5>

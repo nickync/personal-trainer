@@ -15,10 +15,11 @@ public class UserController {
     @Autowired
     JwtSecurityConfig jwtSecurityConfig;
     @PostMapping("/sign-up")
-    public void createUser(@RequestBody SysUser user){
+    public SysUser createUser(@RequestBody SysUser user){
         System.out.println(user.getUsername());
-        userRepository.save(user);
+        SysUser sysUser = userRepository.save(user);
         jwtSecurityConfig.createNewUser(user, jwtSecurityConfig.dataSource());
+        return sysUser;
     }
 
     @GetMapping("/getRole/{username}")
