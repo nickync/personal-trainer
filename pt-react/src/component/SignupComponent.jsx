@@ -124,7 +124,7 @@ export default function SignupComponent() {
         let user = {username: username, password: password, role:role}
         signUpService(user).then(res => {
             if (res.status === 200){
-                if (role == 'TRAINER'){
+                if (role === 'TRAINER'){
                     let trainer = {id:res.data['userId'], firstName: firstName, lastName: lastName, bio:bio, role:role, img:img, yearsOfExp:years, motto:motto, background:background, location:location, price:price, rating:0}
                     trainerSignUpService(trainer).then(res => {
                         setRegistrationState(true)

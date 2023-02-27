@@ -3,11 +3,13 @@ import { Badge, Container } from 'react-bootstrap'
 import { getCustomerService, getTrainerService } from './api/ApiService'
 import { useAuth } from './AuthContext'
 import {Row, Col} from 'react-bootstrap'
+import { useNavigate } from 'react-router-dom'
 
 export default function CustomerDetails() {
   const authContext = useAuth()
   const [customer, setCustomer] = useState([])
   const [trainer, setTrainer] = useState()
+  const navigate = useNavigate()
 
   useEffect( () => {
     getCustomerService(authContext.id).then(res => {
@@ -25,14 +27,21 @@ export default function CustomerDetails() {
     }
   }, [customer.trainerId])
 
+  const handleEdit = () => {
+    navigate('/customer/edit')
+  }
+
 
   return (
     <Container className='mt-5'>
+      <Row className='text-end'>
+        <Col><button className='btn btn-sm btn-dark' onClick={handleEdit}>Edit</button></Col>
+      </Row>
       <Row>
         <Col><img className="card-img-top" height={'100%'} alt="#" src={customer.img ? customer.img : 'https://www.nicepng.com/png/detail/14-148358_lovely-penguin-clip-art-is-penguin-profile.png'}></img></Col>
         <Col>
           <Row className='justify-content-center fs-1 text-uppercase'> {customer.firstName + " " + customer.lastName}</Row>
-          <Row className='justify-content-center fs-4 fst-italic my-3'> <Badge bg='info' style={{width:'30%'}}>{customer.goal}</Badge></Row>
+          <Row className='justify-content-center fs-4 fst-italic my-3'> <Badge bg='info' style={{width:'50%'}}>{customer.goal}</Badge></Row>
           <Row className='justify-content-center fw-bold my-1' >Age: {customer.age}</Row>
           <Row className='justify-content-center fw-bold my-1' >Height: {customer.height}</Row>
           <Row className='justify-content-center fw-bold my-1' >Weight: {customer.weight}</Row>

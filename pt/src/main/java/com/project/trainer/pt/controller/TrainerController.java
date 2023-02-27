@@ -28,7 +28,9 @@ public class TrainerController {
     }
 
     @PostMapping("/trainers/update")
-    public void updateTrainer(@RequestParam Trainer trainer){
+    public void updateTrainer(@RequestBody Trainer trainer){
+        trainer.setRating(trainerRepository.findById(trainer.getId()).get().getRating());
+        trainerRepository.save(trainer);
 
     }
 

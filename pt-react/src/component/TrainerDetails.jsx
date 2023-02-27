@@ -4,10 +4,14 @@ import { getTrainerService } from './api/ApiService'
 import { useAuth } from './AuthContext'
 import {Row, Col} from 'react-bootstrap'
 import {Badge} from 'react-bootstrap'
+import { useNavigate } from 'react-router-dom'
 
 export default function TrainerDetails() {
   const authContext = useAuth()
+  const navigate = useNavigate()
   const [trainer, setTrainer] = useState('')
+
+
   useEffect( () => {
     getTrainerService(authContext.id).then(res => {
       setTrainer(res.data)
@@ -15,8 +19,15 @@ export default function TrainerDetails() {
     })
   },[])
   
+  const handleEdit = () => {
+    navigate('/trainer/edit')
+  }
+
   return (
     <Container className='mt-5'>
+      <Row className='text-end'>
+        <Col><button onClick={handleEdit} className='btn btn-sm btn-dark'>Edit</button></Col>
+      </Row>
       <Row>
         <Col><img className="card-img-top" style={{height:'100%'}} alt="#" src={trainer.img}></img></Col>
         <Col>

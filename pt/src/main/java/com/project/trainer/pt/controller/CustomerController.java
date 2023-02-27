@@ -23,6 +23,11 @@ public class CustomerController {
         customerRepository.save(customer);
     }
 
+    @PostMapping("/customer/update")
+    public void updateCustomer(@RequestBody Customer customer){
+        customer.setTrainerId(customerRepository.findById(customer.getId()).get().getTrainerId());
+        customerRepository.save(customer);
+    }
     @PostMapping("/customers/book")
     public HttpStatus bookTrainer(@RequestParam Long customerId, @RequestParam Long trainerId){
         Customer customer = customerRepository.findById(customerId).get();
