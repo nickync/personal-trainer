@@ -25,12 +25,6 @@ export default function CustomerDetails() {
     }
   }, [customer.trainerId])
 
-  // if (customer.trainerId !== undefined && customer.trainerId !== Number(-1)){
-  //   console.log(customer.trainerId)
-  //   getTrainerService(customer.trainerId).then(res => {
-  //       setTrainer(res.data)
-  //   })
-  // }
 
   return (
     <Container className='mt-5'>
