@@ -42,4 +42,11 @@ public class CustomerController {
 
     }
 
+    @PostMapping("/customers/removeTrainer")
+    public void removeTrainer(@RequestParam Long customerId){
+        Customer customer = customerRepository.findById(customerId).get();
+        customer.setTrainerId(-1);
+        customerRepository.save(customer);
+    }
+
 }

@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Badge } from "react-bootstrap";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { getAllTrainers } from "./api/ApiService";
 import BookTrainerComponent from "./BookTrainerComponent";
 
 export default function TrainerInformation(){
     const [trainers, setTrainers] = useState([])
     const {id} = useParams()
+    const navigate = useNavigate()
     
     useEffect(
         () => getTrainers, []
@@ -27,6 +28,10 @@ export default function TrainerInformation(){
         }
         return stars
     }
+
+    const trainersPage = () => {
+        navigate('/trainers')
+      }
     
     return(
         <Container>
@@ -50,7 +55,7 @@ export default function TrainerInformation(){
                     </Col>
                 </Row>
                 <Row>
-  
+                    <button onClick={trainersPage} className='btn btn-dark'>Back</button>
                 </Row>
             </div>
             )}

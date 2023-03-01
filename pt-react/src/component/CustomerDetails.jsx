@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Badge, Container } from 'react-bootstrap'
-import { getCustomerService, getTrainerService } from './api/ApiService'
+import { getCustomerService, getTrainerService, removeTrainerService } from './api/ApiService'
 import { useAuth } from './AuthContext'
 import {Row, Col} from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
@@ -31,6 +31,20 @@ export default function CustomerDetails() {
     navigate('/customer/edit')
   }
 
+  const trainerInformation = (id) => {
+    navigate(`/trainer/information/${id}`)
+  }
+
+  const removeTrainer = (id) => {
+    removeTrainerService(id).then(res => {
+      
+    })
+    navigate('/customer/details')
+  }
+
+  const trainersPage = () => {
+    navigate('/trainers')
+  }
 
   return (
     <Container className='mt-5'>
@@ -51,13 +65,26 @@ export default function CustomerDetails() {
         <Col className='text-center fs-4 fw-bolder fst-italic my-3'>Your Trainer</Col>
       </Row>
       <Row>
-        <Col className='text-center text-uppercase'>{trainer ? trainer.firstName + " " + trainer.lastName : "You don't have a trainer yet."}</Col>
+        <Col className='text-center text-uppercase'>{trainer ? trainer.firstName + " " + trainer.lastName 
+        : 
+        <Row>
+          "You don't have a trainer yet."
+          <button onClick={trainersPage}>Find a Trainer</button>
+        </Row>
+        }
+        </Col>
       </Row>
       <Row className='justify-content-center fs-4 fst-italic'><Badge bg='dark' style={{width:'10%'}}>{trainer?.bio}</Badge></Row>
       <Row className='justify-content-center fs-6 fst-italic'>{trainer? 'Pricing:':''} {trainer?.price.toFixed(2)}</Row>
-      <Row>
-      {trainer ? <button className='btn btn-info'>Message</button> : ''}
-      </Row>
+
+      {trainer ? 
+        <Row>
+          <Col className='text-end'><button className='btn btn-info' >Message</button></Col>
+          <Col className='text-center'><button className='btn btn-info' onClick={() => trainerInformation(trainer.id)}>View Trainer</button></Col>
+          <Col className='text-start'><button className='btn btn-danger' onClick={() => removeTrainer(authContext.id)}>Remove trainer</button></Col>
+        </Row>
+        : ''}
+
     </Container>
   )
 }

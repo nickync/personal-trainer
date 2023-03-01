@@ -21,3 +21,5 @@ export const updateTrainerService = (trainer) => apiClient.post('/trainers/updat
 export const updateCustomerService = (customer) => apiClient.post('/customer/update', customer)
 
 export const bookTrainerService = (trainerId, customerId) => apiClient.post(`/customers/book?trainerId=${trainerId}&&customerId=${customerId}`)
+
+export const removeTrainerService = (customerId) => apiClient.post(`/customers/removeTrainer?customerId=${customerId}`)
