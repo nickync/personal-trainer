@@ -19,13 +19,17 @@ export default function CustomerDetails() {
   },[authContext.id])
   
   useEffect( () => {
+    getTrainer()
+  }, [customer.trainerId])
+
+  const getTrainer = () => {
     if(customer.trainerId !== undefined && customer.trainerId !== -1){
       console.log(customer.trainerId)
       getTrainerService(customer.trainerId).then(res => {
           setTrainer(res.data)
       })
     }
-  }, [customer.trainerId])
+  }
 
   const handleEdit = () => {
     navigate('/customer/edit')
@@ -37,9 +41,12 @@ export default function CustomerDetails() {
 
   const removeTrainer = (id) => {
     removeTrainerService(id).then(res => {
-      
+      navigate('/')
+      setTimeout(() => {
+        navigate('/customer/details')
+      },1000)
+
     })
-    navigate('/customer/details')
   }
 
   const trainersPage = () => {
@@ -67,9 +74,9 @@ export default function CustomerDetails() {
       <Row>
         <Col className='text-center text-uppercase'>{trainer ? trainer.firstName + " " + trainer.lastName 
         : 
-        <Row>
-          "You don't have a trainer yet."
-          <button onClick={trainersPage}>Find a Trainer</button>
+        <Row className='text-center'>
+          <span>You don't have a trainer yet.</span>
+          <button className='btn btn-sm btn-info px-5 mx-5' onClick={trainersPage}>Find a Trainer</button>
         </Row>
         }
         </Col>
