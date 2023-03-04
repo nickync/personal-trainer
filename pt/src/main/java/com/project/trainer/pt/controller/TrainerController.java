@@ -1,7 +1,9 @@
 package com.project.trainer.pt.controller;
 
 import com.project.trainer.pt.model.Trainer;
+import com.project.trainer.pt.model.TrainingPlan;
 import com.project.trainer.pt.repository.TrainerRepository;
+import com.project.trainer.pt.repository.TrainingPlanRepository;
 import com.project.trainer.pt.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +18,9 @@ public class TrainerController {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private TrainingPlanRepository trainingPlanRepository;
 
     @GetMapping("/trainers")
     public List<Trainer> getAllTrainers(){
@@ -37,6 +42,11 @@ public class TrainerController {
     @PostMapping("/trainers/sign-up")
     public void createTrainer(@RequestBody Trainer trainer){
         trainerRepository.save(trainer);
+    }
+
+    @PostMapping("/setTrainingPlan")
+    public void saveTrainingPlan(@RequestBody TrainingPlan trainingPlan) {
+        trainingPlanRepository.save(trainingPlan);
     }
 
 }

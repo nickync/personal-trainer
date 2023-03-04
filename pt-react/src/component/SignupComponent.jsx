@@ -135,7 +135,7 @@ export default function SignupComponent() {
                         console.log('Fail to create trainer')
                     })
                 } else if (role === 'CUSTOMER'){
-                    let customer = {id:res.data['userId'], firstName:firstName, lastName:lastName, age:age, goal:goal, weight:weight, img:img}
+                    let customer = {id:res.data['userId'], firstName:firstName, lastName:lastName, age:age, goal:goal, weight:weight, height:height, img:img}
                     customerSignUpService(customer).then(res => {
                         navigate('/login')
                     }).catch(res => {

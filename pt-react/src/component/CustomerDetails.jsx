@@ -40,13 +40,15 @@ export default function CustomerDetails() {
   }
 
   const removeTrainer = (id) => {
-    removeTrainerService(id).then(res => {
-      navigate('/')
-      setTimeout(() => {
-        navigate('/customer/details')
-      },1000)
-
-    })
+    let action = window.confirm("Are you sure you want to remove this trainer?")
+    if (action == true){
+      removeTrainerService(id).then(res => {
+        navigate('/')
+        setTimeout(() => {
+          navigate('/customer/details')
+        },1000)
+      })
+    } 
   }
 
   const trainersPage = () => {
@@ -72,17 +74,19 @@ export default function CustomerDetails() {
         <Col className='text-center fs-4 fw-bolder fst-italic my-3'>Your Trainer</Col>
       </Row>
       <Row>
-        <Col className='text-center text-uppercase'>{trainer ? trainer.firstName + " " + trainer.lastName 
+        <Col className='text-center text-uppercase my-2'>{trainer ? trainer.firstName + " " + trainer.lastName 
         : 
         <Row className='text-center'>
           <span>You don't have a trainer yet.</span>
-          <button className='btn btn-sm btn-info px-5 mx-5' onClick={trainersPage}>Find a Trainer</button>
+          <Col></Col>
+          <Col><button className='btn btn-sm btn-info' style={{width:'150px'}} onClick={trainersPage}>Find a Trainer</button></Col>
+          <Col></Col>
         </Row>
         }
         </Col>
       </Row>
       <Row className='justify-content-center fs-4 fst-italic'><Badge bg='dark' style={{width:'10%'}}>{trainer?.bio}</Badge></Row>
-      <Row className='justify-content-center fs-6 fst-italic'>{trainer? 'Pricing:':''} {trainer?.price.toFixed(2)}</Row>
+      <Row className='justify-content-center fs-6 fst-italic my-2'>{trainer? 'Pricing:':''} {trainer?.price.toFixed(2)}</Row>
 
       {trainer ? 
         <Row>

@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 public class CustomerController {
 
@@ -49,4 +51,9 @@ public class CustomerController {
         customerRepository.save(customer);
     }
 
+    @GetMapping("/trainers/getClients")
+    public List<Customer> getTrainerClients(@RequestParam Long trainerId){
+        List<Customer> customersList = customerRepository.findAll();
+        return customersList.stream().filter(i -> i.getTrainerId() == trainerId).toList();
+    }
 }

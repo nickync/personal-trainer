@@ -34,6 +34,9 @@ public class Customer {
     @ColumnDefault("-1")
     private long trainerId;
 
+    @Column(length = 1000)
+    private String img;
+
     public Customer() {
     }
 
@@ -107,5 +110,13 @@ public class Customer {
 
     public void setTrainerId(long trainerId) {
         this.trainerId = trainerId;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
     }
 }
