@@ -83,7 +83,7 @@ function App() {
             </AuthenticatedRoute>
           } />
 
-          <Route path='/setTrainingPlan' element = {
+          <Route path='/setTrainingPlan/:customerId' element = {
             <AuthenticatedRoute>
               {<SetTrainingPlanComponent /> }
             </AuthenticatedRoute>

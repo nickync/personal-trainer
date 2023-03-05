@@ -36,7 +36,7 @@ export default function Home() {
             .filter(trainer => trainer.rating > 3)
             .map(trainer => 
                 <div className='p-2 mt-5 mb-5' key={trainer.id}>
-                    <div className='row'>
+                    <div className='row align-items-center'>
                         <div className='col-lg-4'>
                             <h2 className='text-gray fw-bolder'>{trainer.firstName.toUpperCase() + ' ' + trainer.lastName.toUpperCase()}</h2>
                             <p><Badge bg='dark'>{trainer.bio}</Badge></p>
@@ -49,7 +49,7 @@ export default function Home() {
                                 <p className='ms-2'>llalallalalalalallalaaa</p>
                             </div>
                         </div>
-                        <div className='col-lg-4 d-flex flex-column'>
+                        <div className='col-lg-4 d-flex flex-column align-items-center'>
                             <img src={trainer.img} className="img-thumbnail rounded align-items-center" width={'200px'} alt='thumb'/>
                             <button className='btn btn-sm btn-info my-1' style={{width:'200px'}} onClick={() => handleTrainerInformation(trainer.id)} >View more</button>
                         </div>

@@ -12,7 +12,6 @@ export default function ManageClientComponent() {
     const getClients = () => {
         getTrainerClients(authContext.id).then(res => {
             setClients(res.data)
-            console.log(res.data)
         })
     }
 
@@ -20,8 +19,8 @@ export default function ManageClientComponent() {
         getClients()
     },[authContext.id])
 
-    const setTrainingPlan = () => {
-        navidate('/setTrainingPlan')
+    const setTrainingPlan = (customerId) => {
+        navidate(`/setTrainingPlan/${customerId}`)
     }
 
   return (
@@ -38,7 +37,7 @@ export default function ManageClientComponent() {
                         <p className="card-text">{client.goal}</p>
                         <p className='card-text'>{client.height}</p>
                         <p className='card-text'>{client.weight}</p>
-                        <button className="btn btn-primary" onClick={setTrainingPlan}>Customize plan</button>
+                        <button className="btn btn-primary" onClick={() => setTrainingPlan(client.id)}>Customize plan</button>
                     </div>
                 </div>
             )}

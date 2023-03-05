@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 public class TrainerController {
@@ -49,4 +50,9 @@ public class TrainerController {
         trainingPlanRepository.save(trainingPlan);
     }
 
+    @GetMapping("/getPlans")
+    public List<TrainingPlan> getAllPlansForCustomer(@RequestParam Long trainerId, @RequestParam Long customerId){
+        List<TrainingPlan> trainingPlans = trainingPlanRepository.findAll();
+        return trainingPlans.stream().filter(i -> i.getTrainerId() == trainerId && i.getCustomerId() == customerId).collect(Collectors.toList());
+    }
 }
