@@ -8,6 +8,7 @@ import com.project.trainer.pt.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -47,6 +48,7 @@ public class TrainerController {
 
     @PostMapping("/setTrainingPlan")
     public void saveTrainingPlan(@RequestBody TrainingPlan trainingPlan) {
+        System.out.println(trainingPlan.getDate());
         trainingPlanRepository.save(trainingPlan);
     }
 

@@ -26,7 +26,7 @@ public class TrainingPlan {
     private String details;
 
     @Column
-    private Date date;
+    private String date;
 
     @Column
     private Boolean completed;
@@ -71,11 +71,11 @@ public class TrainingPlan {
         this.details = details;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
