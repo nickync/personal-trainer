@@ -8,7 +8,6 @@ import com.project.trainer.pt.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -47,8 +46,11 @@ public class TrainerController {
     }
 
     @PostMapping("/setTrainingPlan")
-    public void saveTrainingPlan(@RequestBody TrainingPlan trainingPlan) {
+    public void saveTrainingPlan(@RequestBody TrainingPlan trainingPlan, @RequestParam(required = false) Long planId) {
         System.out.println(trainingPlan.getDate());
+        if (planId != null){
+            trainingPlanRepository.save(trainingPlan);
+        }
         trainingPlanRepository.save(trainingPlan);
     }
 
@@ -57,4 +59,5 @@ public class TrainerController {
         List<TrainingPlan> trainingPlans = trainingPlanRepository.findAll();
         return trainingPlans.stream().filter(i -> i.getTrainerId() == trainerId && i.getCustomerId() == customerId).collect(Collectors.toList());
     }
+
 }

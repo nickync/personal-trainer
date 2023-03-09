@@ -14,7 +14,7 @@ export default function SetTrainingPlanComponent() {
         while (today.getDay() > 0){
             today.setDate(today.getDate() - 1)
         }
-        today.setDate(today.getDate() - 1)
+        today.setDate(today.getDate() - 15)
     }
 
     useEffect(() => {
@@ -51,14 +51,13 @@ export default function SetTrainingPlanComponent() {
 
     const goToday = () => {
         let d = new Date()
-        today.setDate(d.getDate()-35)
         setToday(today)
         generateGrid()
     }
 
     useEffect(() => {
         generateGrid()
-    }, [])
+    }, [today])
 
     const changePlan = () => {
 
@@ -116,8 +115,23 @@ export default function SetTrainingPlanComponent() {
         })
     },[])
 
-    const editPlan = () => {
-
+    const editPlan = (planId) => {
+        // event.preventDefault()
+        let plan = {planId:planId, trainerId: trainerId, customerId: customerId, title: title, details: detail, date:date, completed: completed}
+        console.log(plan)
+        setTrainingPlanService(plan).then(res => {
+            if (res.status == 200){
+                setSavingStatus(true)
+                setTimeout(() => {
+                    setPlanDate('')
+                    setTitle('')
+                    setDetail('')
+                    setSavingStatus(false)
+                }, 1500);
+            }
+        }).catch(err => {
+            console.log(err)
+        })
     }
 
   return (
@@ -205,7 +219,20 @@ export default function SetTrainingPlanComponent() {
                         <Col>{plan.title}</Col>
                         <Col>{plan.details}</Col>
                         <Col>{plan.completed ? 'Completed' : 'Not Completed'}</Col>
-                        <Col><button>Edit</button></Col>
+                        <Col>
+                        <Popup trigger={<button>Edit</button> } position='top center'>
+
+                            <div className="d-flex flex-column">
+                                <label>Date</label>
+                                <input type='date' value={date} onChange={handleDate} />
+                                <label>Title</label>
+                                <input type='text' value={title} onChange={handleTitle} />
+                                <label>Details</label>
+                                <textarea type='text' value={detail} onChange={handleDetail} />
+                                <button onClick={() => editPlan(plan.id)}>Save</button>
+                            </div>
+
+                        </Popup></Col>
                     </Row>)}
             </div>
         </div>

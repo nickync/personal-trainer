@@ -29,3 +29,5 @@ export const getTrainerClients = (trainerId) => apiClient.get('/trainers/getClie
 export const setTrainingPlanService = (trainingPlan) => apiClient.post(`/setTrainingPlan`, trainingPlan)
 
 export const getAllPlansService = (trainerId, customerId) => apiClient.get(`/getPlans?trainerId=${trainerId}&&customerId=${customerId}`)
+
+export const updatePlanService = (planId) => apiClient.post(`/setTrainingplan?planId=${planId}`)
