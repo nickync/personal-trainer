@@ -111,14 +111,14 @@ export default function SetTrainingPlanComponent() {
     useEffect(() => {
         getAllPlansService(trainerId, customerId).then(res => {
             setPlans(res.data)
-            console.log(res.data)
         })
     },[])
 
-    const editPlan = (planId) => {
-        // event.preventDefault()
+    const editPlan = (planId, planDate) => {
+        console.log(date)
+        setPlanDate(planDate)
         let plan = {planId:planId, trainerId: trainerId, customerId: customerId, title: title, details: detail, date:date, completed: completed}
-        console.log(plan)
+        console.log(date)
         setTrainingPlanService(plan).then(res => {
             if (res.status == 200){
                 setSavingStatus(true)
@@ -135,9 +135,9 @@ export default function SetTrainingPlanComponent() {
     }
 
   return (
-    <div>
-        <div>Training Plan</div>
-        <div className="container-fluid">
+    <div className="container-fluid">
+        <h2 className="text-center font-monospace fs-2 fw-bolder my-3" style={{'text-shadow': '3px 3px 9px white'}}>Training Plan</h2>
+        <div>
             <Row>
                 <Col></Col>
                 <Col><button className="btn btn-sm btn-dark"  onClick={prevWeek}>Previous Week</button></Col>
@@ -170,6 +170,7 @@ export default function SetTrainingPlanComponent() {
                                     <div className="card py-2 px-2 bg-dark bg-gradient text-light">
                                         <div className="fst-3 fw-bold text-uppercase">{plan.title}</div>
                                         <div className="fst-6 fst-italic">{plan.details}</div>
+                                        <button>Edit</button>
                                     </div>
                                 </Popup>
                               </span>)
@@ -179,9 +180,10 @@ export default function SetTrainingPlanComponent() {
                     <Col></Col>
             </Row>)}
         </div>
-        <div className="container-fluid">
-            <Row>
-                <Col></Col>
+
+        <div className="container-fluid d-flex flex-row justify-content-around">
+            <div>
+                <Col className="text-center fs-4 fw-bolder my-3">Add a plan</Col>
                 <Col></Col>
                 <Col>
                     <div className="d-flex flex-column">
@@ -204,8 +206,8 @@ export default function SetTrainingPlanComponent() {
                 </Col>
                 <Col></Col>
                 <Col></Col>
-            </Row>
-            <div className="container mt-5">
+            </div>
+            <div className="mt-5">
                 <Row>
                     <Col>Date</Col>
                     <Col>Title</Col>
@@ -229,7 +231,7 @@ export default function SetTrainingPlanComponent() {
                                 <input type='text' value={title} onChange={handleTitle} />
                                 <label>Details</label>
                                 <textarea type='text' value={detail} onChange={handleDetail} />
-                                <button onClick={() => editPlan(plan.id)}>Save</button>
+                                <button onClick={() => editPlan(plan.id, plan.date)}>Save</button>
                             </div>
 
                         </Popup></Col>
