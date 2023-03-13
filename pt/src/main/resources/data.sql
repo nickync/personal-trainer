@@ -1,4 +1,4 @@
-insert into _User (user_id, username, password, role) VALUES ('22', 'customer', 'password', 'CUSTOMER');
+insert into _User (user_id, username, password, role) VALUES ('99995', 'customer', 'password', 'CUSTOMER');
 insert into _User (user_id, username, password, role) VALUES ('99999', 'trainer', 'password', 'TRAINER');
 
 insert into trainer (id, first_name, last_name, role, bio, rating, img, price, motto, background, location, years_of_exp) VALUES ('99996', 'tony', 'dimon', 'TRAINER', 'CEO', 3, 'https://cdn.vox-cdn.com/thumbor/UjJJtbVjzjURf6oiXSa0SomaEfU=/0x0:3000x1779/1200x800/filters:focal(1204x216:1684x696)/cdn.vox-cdn.com/uploads/chorus_image/image/59606327/ktokatitmir0.0.jpg', 100.00, 'Just do it', 'I own Some factory', 'New York', 5);

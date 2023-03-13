@@ -46,12 +46,27 @@ public class TrainerController {
     }
 
     @PostMapping("/setTrainingPlan")
-    public void saveTrainingPlan(@RequestBody TrainingPlan trainingPlan, @RequestParam(required = false) Long planId) {
-        System.out.println(trainingPlan.getDate());
-        if (planId != null){
+    public void saveTrainingPlan(@RequestBody TrainingPlan trainingPlan) {
+        Long planId = trainingPlan.getId();
+
+        System.out.println(planId);
+        if (planId == 0){
             trainingPlanRepository.save(trainingPlan);
+        } else {
+            TrainingPlan plan = trainingPlanRepository.findById(planId).get();
+            System.out.println(plan.getDetails());
+            if (trainingPlan.getDate() != null){
+                plan.setDate(trainingPlan.getDate());
+            }
+            if (!trainingPlan.getTitle().equals("")){
+                plan.setTitle(trainingPlan.getTitle());
+            }
+            if (!trainingPlan.getDetails().equals("")){
+                plan.setDetails(trainingPlan.getDetails());
+            }
+            System.out.println(plan.getDetails());
+            trainingPlanRepository.save(plan);
         }
-        trainingPlanRepository.save(trainingPlan);
     }
 
     @GetMapping("/getPlans")
@@ -59,5 +74,11 @@ public class TrainerController {
         List<TrainingPlan> trainingPlans = trainingPlanRepository.findAll();
         return trainingPlans.stream().filter(i -> i.getTrainerId() == trainerId && i.getCustomerId() == customerId).collect(Collectors.toList());
     }
+
+    @PostMapping("/deletePlan")
+    public void deletePlan(@RequestParam Long id){
+        trainingPlanRepository.deleteById(id);
+    }
+
 
 }

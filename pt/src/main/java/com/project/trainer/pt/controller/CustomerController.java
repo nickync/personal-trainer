@@ -1,7 +1,9 @@
 package com.project.trainer.pt.controller;
 
 import com.project.trainer.pt.model.Customer;
+import com.project.trainer.pt.model.TrainingPlan;
 import com.project.trainer.pt.repository.CustomerRepository;
+import com.project.trainer.pt.repository.TrainingPlanRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +15,9 @@ public class CustomerController {
 
     @Autowired
     private CustomerRepository customerRepository;
+
+    @Autowired
+    private TrainingPlanRepository trainingPlanRepository;
 
     @GetMapping("/customers/get")
     public Customer getCustomerById(@RequestParam Long id){
@@ -55,5 +60,12 @@ public class CustomerController {
     public List<Customer> getTrainerClients(@RequestParam Long trainerId){
         List<Customer> customersList = customerRepository.findAll();
         return customersList.stream().filter(i -> i.getTrainerId() == trainerId).toList();
+    }
+
+    @PostMapping("/setPlanStatus")
+    public void setPlanStatus(@RequestParam Long planId, @RequestParam Boolean completed){
+        TrainingPlan plan = trainingPlanRepository.findById(planId).get();
+        plan.setCompleted(completed);
+        trainingPlanRepository.save(plan);
     }
 }

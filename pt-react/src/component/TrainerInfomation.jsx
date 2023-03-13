@@ -30,7 +30,7 @@ export default function TrainerInformation(){
     }
 
     const trainersPage = () => {
-        navigate('/trainers')
+        window.history.back()
       }
     
     return(

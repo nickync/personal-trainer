@@ -30,4 +30,8 @@ export const setTrainingPlanService = (trainingPlan) => apiClient.post(`/setTrai
 
 export const getAllPlansService = (trainerId, customerId) => apiClient.get(`/getPlans?trainerId=${trainerId}&&customerId=${customerId}`)
 
-export const updatePlanService = (planId) => apiClient.post(`/setTrainingplan?planId=${planId}`)
+export const updatePlanService = (plan) => apiClient.post(`/setTrainingPlan`, plan)
+
+export const deletePlanService = (planId) => apiClient.post(`/deletePlan?id=${planId}`)
+
+export const setPlanStatusService = (planId, planStatus) => apiClient.post(`/setPlanStatus?planId=${planId}&&completed=${planStatus}`)

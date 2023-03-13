@@ -19,6 +19,7 @@ import EditTrainerComponent from './component/EditTrainerComponent';
 import EditCustomerComponent from './component/EditCustomerComponent';
 import SetTrainingPlanComponent from './component/SetTrainingPlanComponent';
 import FooterComponent from './component/FooterComponent';
+import ViewTrainingPlanComponent from './component/ViewTrainingPlanComponent';
 
 function AuthenticatedRoute({ children }){
   const authContext = useAuth()
@@ -51,7 +52,7 @@ function App() {
           
           <Route path='/customers/trainingplan' element = {
             <AuthenticatedRoute>
-              <TrainingPlanComponent />
+              <ViewTrainingPlanComponent />
             </AuthenticatedRoute>
           } />
 
