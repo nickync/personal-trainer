@@ -165,7 +165,7 @@ export default function SetTrainingPlanComponent() {
                 <Row className="container-fluid" key={Math.random()}>
                     <Col></Col>
                     {week.map(day =>
-                    <Col key={day.substring(0,10)} className="card" style={{width:"10rem", height:"10rem"}}>
+                    <Col className="card" style={{width:"10rem", height:"10rem"}}>
                         <div className="fw-bold text-center">{day.substring(5,10)}</div>
                         {plans.filter(plan => plan.date === day.substring(0,10))
                               .map(plan => 

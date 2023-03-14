@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Badge } from "react-bootstrap";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { getAllTrainers } from "./api/ApiService";
 import BookTrainerComponent from "./BookTrainerComponent";
 
 export default function TrainerInformation(){
     const [trainers, setTrainers] = useState([])
     const {id} = useParams()
-    const navigate = useNavigate()
     
     useEffect(
         () => getTrainers, []

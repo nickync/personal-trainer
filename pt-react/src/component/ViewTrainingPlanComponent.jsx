@@ -10,8 +10,6 @@ export default function ViewTrainingPlanComponent(){
     const [plans, setPlans] = useState([])
     const [today, setToday] = useState(new Date())
     const [month, setMonth] = useState([])
-    const [completed, setCompleted] = useState(false)
-
 
     useEffect(() => {
         getToday()
@@ -41,14 +39,12 @@ export default function ViewTrainingPlanComponent(){
     const prevWeek = () => {
         today.setDate(today.getDate() - 35)
         setToday(today)
-        console.log(today)
         generateGrid()
     }
 
     const nextWeek = () => {
         today.setDate(today.getDate() - 21)
         setToday(today)
-        console.log(today)
         generateGrid()
     }
 
@@ -59,7 +55,6 @@ export default function ViewTrainingPlanComponent(){
     const getCustomer = () => {
         getCustomerService(authContext.id).then(res => {
             setCustomer(res.data)
-            console.log(res.data)
         })
     }
 
@@ -71,7 +66,6 @@ export default function ViewTrainingPlanComponent(){
         if (customer !== ''){
             getAllPlansService(customer.trainerId, customer.id).then(res => {
                 setPlans(res.data)
-                console.log(res.data)
             })   
         }
     }
