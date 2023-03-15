@@ -20,6 +20,7 @@ import EditCustomerComponent from './component/EditCustomerComponent';
 import SetTrainingPlanComponent from './component/SetTrainingPlanComponent';
 import FooterComponent from './component/FooterComponent';
 import ViewTrainingPlanComponent from './component/ViewTrainingPlanComponent';
+import CustomerMessagingComponent from './component/CustomerMessagingComponent';
 
 function AuthenticatedRoute({ children }){
   const authContext = useAuth()
@@ -71,6 +72,12 @@ function App() {
           <Route path='/messaging' element = {
             <AuthenticatedRoute>
               {<MessagingComponent />}
+            </AuthenticatedRoute>
+          } />
+          
+          <Route path='/customerMessaging' element = {
+            <AuthenticatedRoute>
+              {<CustomerMessagingComponent />}
             </AuthenticatedRoute>
           } />
 

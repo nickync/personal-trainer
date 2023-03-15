@@ -47,7 +47,12 @@ export default function NavBarComponent() {
     }
 
     const messagingPage = () => {
-        navigate('/messaging')
+        if(authContext.role === 'TRAINER'){
+            navigate('/messaging')
+        } else if (authContext.role === 'CUSTOMER'){
+            navigate('/customerMessaging')
+        }
+
     }
     
     return (

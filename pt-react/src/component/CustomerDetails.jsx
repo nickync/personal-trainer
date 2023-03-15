@@ -55,6 +55,10 @@ export default function CustomerDetails() {
     navigate('/trainers')
   }
 
+  const messagePage = () => {
+    navigate('/customerMessaging')
+  }
+
   return (
     <Container className='mt-5'>
       <Row className='text-end'>
@@ -90,7 +94,7 @@ export default function CustomerDetails() {
 
       {trainer ? 
         <Row>
-          <Col className='text-end'><button className='btn btn-info' >Message</button></Col>
+          <Col className='text-end'><button className='btn btn-info' onClick={messagePage}>Message</button></Col>
           <Col className='text-center'><button className='btn btn-info' onClick={() => trainerInformation(trainer.id)}>View Trainer</button></Col>
           <Col className='text-start'><button className='btn btn-danger' onClick={() => removeTrainer(authContext.id)}>Remove trainer</button></Col>
         </Row>

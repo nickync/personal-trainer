@@ -14,7 +14,7 @@ export default function SetTrainingPlanComponent() {
         while (today.getDay() > 0){
             today.setDate(today.getDate() - 1)
         }
-        today.setDate(today.getDate() - 15)
+        today.setDate(today.getDate() - 14)
     }
 
     useEffect(() => {
