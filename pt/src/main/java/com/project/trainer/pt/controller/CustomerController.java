@@ -1,14 +1,17 @@
 package com.project.trainer.pt.controller;
 
 import com.project.trainer.pt.model.Customer;
+import com.project.trainer.pt.model.Review;
 import com.project.trainer.pt.model.TrainingPlan;
 import com.project.trainer.pt.repository.CustomerRepository;
+import com.project.trainer.pt.repository.ReviewRepository;
 import com.project.trainer.pt.repository.TrainingPlanRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 public class CustomerController {
@@ -18,6 +21,9 @@ public class CustomerController {
 
     @Autowired
     private TrainingPlanRepository trainingPlanRepository;
+
+    @Autowired
+    private ReviewRepository reviewRepository;
 
     @GetMapping("/customers/get")
     public Customer getCustomerById(@RequestParam Long id){
@@ -68,4 +74,16 @@ public class CustomerController {
         plan.setCompleted(completed);
         trainingPlanRepository.save(plan);
     }
+
+    @PostMapping("/sendAReview")
+    public void sendReview(@RequestBody Review review){
+        System.out.println(review.getTrainerId());
+        reviewRepository.save(review);
+    }
+
+    @GetMapping("/getReview")
+    public List<Review> getAllReview(@RequestParam Long trainerId){
+        return reviewRepository.findAll().stream().filter(review -> Objects.equals(review.getTrainerId(), trainerId)).toList();
+    }
+
 }

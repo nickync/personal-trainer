@@ -2,6 +2,10 @@ import React, { useEffect, useState } from 'react'
 import { getAllTrainers } from './api/ApiService'
 import { Badge } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
+import image1 from '../image1.jpg'
+import image2 from '../image2.jpg'
+import image3 from '../image3.jpg'
+import image4 from '../image4.jpg'
 
 export default function Home() {
     const [trainers, setTrainers] = useState([])
@@ -27,7 +31,7 @@ export default function Home() {
 
   return (
     <div className='container-fluid text-center'>
-        <h1 className='fw-light m-3' style={{textShadow:'2px 2px 2px black'}}>Welcome to Personal Trainer!</h1>
+        <h1 id='header-pt' className='fw-bold fst m-3' style={{textShadow:'2px 2px 2px black'}}>Welcome to Personal Trainer!</h1>
         {/* <div>
             <ul>
                 <li>Our Personal Trainers are passionate about health and fitness, and through their work inspire and encourage others to develop healthy habits and routines</li>
@@ -45,34 +49,34 @@ export default function Home() {
                 <button type="button" data-bs-target="#textCaro" data-bs-slide-to="3" aria-label="Slide 3"></button>
             </div>
 
-            <div className="carousel-inner" style={{height:'20rem'}}>
+            <div className="carousel-inner" style={{height:'40rem'}}>
                 <div className="carousel-item active" >
                     <div className="card-header">
-                        <h3 className="text-center fs-5 fst-italic fw-semibold text-dark text-body-emphasis" style={{textShadow:'1px 1px 2px black'}}>Our Personal Trainers are passionate about health and fitness, and through their work inspire and encourage others to develop healthy habits and routines</h3>
+                        <h3 className="text-center fs-5 fst-italic fw-semibold text-dark text-body-emphasis" style={{textShadow:'1px 1px 1px black'}}>Our Personal Trainers are passionate about health and fitness, and through their work inspire and encourage others to develop healthy habits and routines</h3>
                     </div>
-                    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTE3eGhRH0Ih2wJt1BpxkoJSxqLBiV9u1MBQ&usqp=CAU' alt='p'/>
+                    <img src={image2} className='w-75' alt='p'/>
 
                 </div>
 
                 <div className="carousel-item" >
                     <div className="card-header">
-                        <h2 className="text-center fs-5 fst-italic fw-semibold text-dark text-body-emphasis" style={{textShadow:'1px 1px 2px black'}}>Perform fitness assessments to determine client’s level of fitness</h2>
+                        <h2 className="text-center fs-5 fst-italic fw-semibold text-dark text-body-emphasis" style={{textShadow:'1px 1px 1px black'}}>Perform fitness assessments to determine client’s level of fitness</h2>
                     </div>
-                    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSl_GTFVxdTTGbmtBPwlC1poeTEYzfEeGniBg&usqp=CAU' alt='p'/>
+                    <img src={image1} className='w-75' alt='p'/>
                 </div>
 
                 <div className="carousel-item" >
                     <div className="card-header">
-                        <h2 className="text-center fs-5 fst-italic fw-semibold text-dark text-body-emphasis" style={{textShadow:'1px 1px 2px black'}}>Develop + implement tailored exercise regimens that meet client’s needs.</h2>
+                        <h2 className="text-center fs-5 fst-italic fw-semibold text-dark text-body-emphasis" style={{textShadow:'1px 1px 1px black'}}>Develop + implement tailored exercise regimens that meet client’s needs.</h2>
                     </div>
-                    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKv6F1WuL_oHMVMWzobHG3YZ9CNDUfMQPp0w&usqp=CAU' alt='p' />
+                    <img src={image3} className='w-75' alt='p'/>
                 </div>
 
                 <div className="carousel-item" >
                     <div className="card-header">
-                        <h2 className="text-center fs-5 fst-italic fw-semibold text-dark text-body-emphasis" style={{textShadow:'1px 1px 2px black'}}>Communicate and follow-up with clients</h2>
+                        <h2 className="text-center fs-5 fst-italic fw-semibold text-dark text-body-emphasis" style={{textShadow:'1px 1px 1px black'}}>Communicate and follow-up with clients</h2>
                     </div>
-                    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBQ4JH4aU73hKnO_TBqQ4VFawEyQ6gEbhrzA&usqp=CAU' alt='p' />
+                    <img src={image4} className='w-75' alt='p'/>
                 </div>
             </div>
 

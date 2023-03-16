@@ -1,7 +1,8 @@
 .App {
   font-family: 'Roboto', sans-serif;
   text-align: center;
-  background: linear-gradient(to top right, #ccffff 37%, #000066 100%);
+  /* background: linear-gradient(to top right, #ccffff 37%, #000066 100%); */
+  background: linear-gradient(to top, #0000cc 0%, #003300 100%);
 }
 
 .App-logo {
@@ -80,4 +81,18 @@
     -webkit-transform: translateX(100%);
     transform: translateX(100%);
   }
+}
+
+#header-pt {
+  font-size: 60px;
+  font-weight: 600;
+  /* color: #fdfdfe; */
+  /* text-shadow: 0px 0px 5px #444547, 0px 0px 10px #444547, 0px 0px 10px #444547,
+    0px 0px 20px #444547; */
+  font-family:Arial, Helvetica, sans-serif;
+  background: -webkit-linear-gradient(45deg, #ffffff, #e6e2e2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; 
+  -moz-background-clip: text;
+  -moz-text-fill-color: transparent;
 }

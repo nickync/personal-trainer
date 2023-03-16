@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Container } from 'react-bootstrap'
-import { getTrainerService } from './api/ApiService'
+import { getTrainerReviewService, getTrainerService } from './api/ApiService'
 import { useAuth } from './AuthContext'
 import {Row, Col} from 'react-bootstrap'
 import {Badge} from 'react-bootstrap'
@@ -10,7 +10,7 @@ export default function TrainerDetails() {
   const authContext = useAuth()
   const navigate = useNavigate()
   const [trainer, setTrainer] = useState('')
-
+  const [reviews, setReviews] = useState([])
 
   useEffect( () => {
     getTrainerService(authContext.id).then(res => {
@@ -21,6 +21,25 @@ export default function TrainerDetails() {
   
   const handleEdit = () => {
     navigate('/trainer/edit')
+  }
+
+  const getAllReviews = () => {
+    getTrainerReviewService(authContext.id).then(res => {
+      setReviews(res.data)
+    })
+  }
+
+  useEffect(()=>{
+    getAllReviews()
+    console.log(reviews)
+  },[trainer])
+
+  const getStars = (rating) => {
+    let stars = ""
+    for (let i=0; i<rating; i++){
+        stars += "\u2B50"
+    }
+    return stars
   }
 
   return (
@@ -40,6 +59,17 @@ export default function TrainerDetails() {
           <Row className='justify-content-center fw-bold my-1' >Years of experience: {trainer.yearsOfExp}</Row>
         </Col>
       </Row>
+      
+      <Row className='text-center shadow-lg m-3'>
+        <h3>Customer Reviews</h3>
+      </Row>
+      {reviews.map(review => 
+        <>
+          <Row className='text-uppercase fw-bold'>{review.customerName}:</Row>
+          <Row>{getStars(review.rating)}</Row>
+          <Row className='fst-italic p-2 mb-4'>{review.review}</Row>
+        </>
+      )}
     </Container>
   )
 }

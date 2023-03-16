@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { Badge, Container } from 'react-bootstrap'
-import { getCustomerService, getTrainerService, removeTrainerService } from './api/ApiService'
+import { getCustomerService, getTrainerService, removeTrainerService, sendReviewService } from './api/ApiService'
 import { useAuth } from './AuthContext'
 import {Row, Col} from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
+import Popup from 'reactjs-popup'
 
 export default function CustomerDetails() {
   const authContext = useAuth()
@@ -59,6 +60,35 @@ export default function CustomerDetails() {
     navigate('/customerMessaging')
   }
 
+  const [rating, setRating] = useState(1)
+  const [review, setReview] = useState('')
+  const [sent, setSent] = useState(false)
+
+  const handleRatingChange = (event) => {
+    event.preventDefault()
+    setRating(event.target.value)
+  }
+
+  const handleReviewChange = (event) => {
+    event.preventDefault()
+    setReview(event.target.value)
+  }
+
+
+  const sendReview = () => {
+    let reviewObj = {trainerId: customer.trainerId, customerId: customer.id, rating: rating, review: review, customerName: customer.firstName + " " + customer.lastName}
+    console.log(reviewObj)
+    console.log(customer.trainerId)
+    sendReviewService(reviewObj).then(res => {
+      if (res.status === 200){
+        setSent(true)
+        setTimeout(() => {
+          setSent(false)
+        }, 1500)
+      }
+    })
+  }
+
   return (
     <Container className='mt-5'>
       <Row className='text-end'>
@@ -90,13 +120,35 @@ export default function CustomerDetails() {
         </Col>
       </Row>
       <Row className='justify-content-center fs-4 fst-italic'><Badge bg='dark' style={{width:'10%'}}>{trainer?.bio}</Badge></Row>
-      <Row className='justify-content-center fs-6 fst-italic my-2'>{trainer? 'Pricing:':''} {trainer?.price.toFixed(2)}</Row>
+      <Row className='justify-content-center fs-6 fst-italic my-2'>{trainer? 'Hourly Pricing:':''} {trainer?.price.toFixed(2)}</Row>
 
       {trainer ? 
         <Row>
-          <Col className='text-end'><button className='btn btn-info' onClick={messagePage}>Message</button></Col>
-          <Col className='text-center'><button className='btn btn-info' onClick={() => trainerInformation(trainer.id)}>View Trainer</button></Col>
-          <Col className='text-start'><button className='btn btn-danger' onClick={() => removeTrainer(authContext.id)}>Remove trainer</button></Col>
+          <Col className='text-end'><button className='btn btn-sm btn-info' onClick={messagePage}>Message</button></Col>
+          <Col className='text-center'><button className='btn btn-sm btn-info' onClick={() => trainerInformation(trainer.id)}>View Trainer</button></Col>
+          
+          <Col>
+            <Popup trigger={<button className="btn btn-sm btn-info me-2" > Send a review </button> } position='top center'>
+
+              <div className="d-flex flex-column p-2 bg-gradient text-light bg-dark rounded-1">
+                  <label>Rating</label>
+                  <select value={rating} onChange={handleRatingChange}>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                  </select>
+                  <label>Review</label>
+                  <textarea type='text' value={review} onChange={handleReviewChange} />
+                  <button className="btn btn-sm btn-dark btn-outline-secondary" onClick={sendReview}>Send</button>
+              </div>
+
+            </Popup>
+            {sent ? <div className='text-success-emphasis'>Review has been sent...</div> : ""}
+          </Col>
+
+          <Col className='text-start'><button className='btn btn-sm btn-danger' onClick={() => removeTrainer(authContext.id)}>Remove trainer</button></Col>
         </Row>
         : ''}
 

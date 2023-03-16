@@ -39,3 +39,7 @@ export const setPlanStatusService = (planId, planStatus) => apiClient.post(`/set
 export const sendMessageService = (message) => apiClient.post(`/sendMessage`, message)
 
 export const getAllMessageService = (trainerId, customerId) => apiClient.get(`/getMessage?trainerId=${trainerId}&&customerId=${customerId}`)
+
+export const sendReviewService = (review) => apiClient.post('/sendAReview', review)
+
+export const getTrainerReviewService = (trainerId) => apiClient.get(`/getReview?trainerId=${trainerId}`)
