@@ -24,7 +24,7 @@ export default function CustomerDetails() {
   }, [customer.trainerId])
 
   const getTrainer = () => {
-    if(customer.trainerId !== undefined && customer.trainerId !== -1){
+    if(customer.trainerId !== undefined && customer.trainerId !== 0){
       console.log(customer.trainerId)
       getTrainerService(customer.trainerId).then(res => {
           setTrainer(res.data)

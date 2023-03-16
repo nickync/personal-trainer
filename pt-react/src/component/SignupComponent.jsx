@@ -136,6 +136,7 @@ export default function SignupComponent() {
                     })
                 } else if (role === 'CUSTOMER'){
                     let customer = {id:res.data['userId'], firstName:firstName, lastName:lastName, age:age, goal:goal, weight:weight, height:height, img:img}
+                    console.log(customer)
                     customerSignUpService(customer).then(res => {
                         navigate('/login')
                     }).catch(res => {

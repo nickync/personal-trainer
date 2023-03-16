@@ -13,13 +13,13 @@ export default function BookTrainerComponent({ trainerid }) {
         console.log(customerId)
         if (customerId){
             getCustomerService(customerId).then(res => {
-                console.log(res.data)
-                console.log(res.data.trainerId)
-                if (res.data.trainerId !== -1){
+                let customer = res.data
+                if (customer.trainerId !== -1 && customer.trainerId !== 0){
                     setDisableBook(true)
                 }
             }).catch(err => {
                 setDisableBook(true)
+                console.log(err)
                 console.log('trainers cannot book other trainer')
             })
         }
