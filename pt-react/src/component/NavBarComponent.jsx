@@ -58,7 +58,7 @@ export default function NavBarComponent() {
     return (
         <nav className="navbar sticky-top navbar-expand-lg navbar-dark bg-dark bg-gradient">
             <div className="container-fluid">
-                <Nav.Link onClick={homePage} className="navbar-brand fst-italic text-info text-badge fw-bolder text-center" href="/">Personal Trainer</Nav.Link>
+                <Nav.Link onClick={homePage} className="navbar-brand fst-italic text-info text-badge fw-bolder text-center" >Personal Trainer</Nav.Link>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>

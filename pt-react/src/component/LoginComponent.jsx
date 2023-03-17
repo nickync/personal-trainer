@@ -7,28 +7,39 @@ import { useAuth } from './AuthContext'
 export default function LoginComponent() {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
+    const [alert, setAlert] = useState(false)
+    const [alertPassword, setAlertPassword] = useState(false)
     const navigate = useNavigate()
     const authContext = useAuth()
 
     const updateUsername = (event) => {
+        setAlert(false)
+        setAlertPassword(false)
         setUsername(event.target.value)
     }
 
     const updatePassword = (event) => {
+        setAlert(false)
+        setAlertPassword(false)
         setPassword(event.target.value)
     }
 
     const handleSubmit = async (event) => {
         event.preventDefault()
+        if (username == '' || password == ''){
+            setAlert(true)
+        }
+        
         if (await authContext.login(username, password)){
             let role = null
             await getRoleService(username).then(res => {
                 role = res.data
+            }).catch(err => {
+                console.log(err)
             })
             role === 'TRAINER' ? navigate('/trainer/details') : navigate('/customer/details')
-            
         } else {
-            console.log('errr')
+            setAlertPassword(true)
         }
     }
 
@@ -44,13 +55,15 @@ export default function LoginComponent() {
         <div className='row text-center'>
             <div className='col-sm-4'></div>
             <div className='col-sm-4'>
+                {alert ? <div className='text-danger fw-bold'>Please enter your username and password.</div> : " "}
+                {alertPassword ? <div className='text-danger fw-bold'>Your username and password does not match.</div> : " "}
                 <Form>
                     <Form.Group className='mb-3' controlId='username'>
-                        <Form.Label>Username</Form.Label>
+                        <Form.Label className='fs-6 fw-bold'>Username</Form.Label>
                         <Form.Control type='username' placeholder='Enter username' value={username} onChange={updateUsername}/>
                     </Form.Group>
                     <Form.Group className='mb-3' controlId='password'>
-                        <Form.Label>Password</Form.Label>
+                        <Form.Label className='fs-6 fw-bold'>Password</Form.Label>
                         <Form.Control type='password' placeholder='Enter password' value={password} onChange={updatePassword}/>
                     </Form.Group>
                     <div className='d-flex justify-content-center'>

@@ -53,8 +53,8 @@ export default function TrainerInformation(){
                         {/* <button className="btn btn-dark btn-sm border-3" onClick={() => handleBookTrainer(trainer.id, customerId)} >Book this trainer</button> */}
                     </Col>
                 </Row>
-                <Row>
-                    <button onClick={trainersPage} className='btn btn-dark'>Back</button>
+                <Row className="justify-content-center">
+                    <button onClick={trainersPage} className='btn btn-dark w-25'>Back</button>
                 </Row>
             </div>
             )}

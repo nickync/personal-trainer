@@ -1,8 +1,8 @@
-import React, { useRef } from "react"
+import React from "react"
 import { useAuth } from "./AuthContext"
 import { useState, useEffect } from "react"
 import { getAllMessageService, getTrainerClients, sendMessageService } from "./api/ApiService"
-import { Col, Row } from "react-bootstrap"
+import { Row } from "react-bootstrap"
 
 
 export default function MessagingComponent() {
@@ -13,7 +13,8 @@ export default function MessagingComponent() {
     const [sent, setSent] = useState(false)
     const [clientId, setClientId] = useState('')
     const [displayMsg, setDisplayMsg] = useState(false)
-    
+    const [selected, setSelected] = useState(false)
+ 
     const getClients = () => {
         getTrainerClients(authContext.id).then(res => {
             setClients(res.data)
@@ -25,6 +26,11 @@ export default function MessagingComponent() {
     },[authContext.id])
 
     const getMessage = (trainerId, customerId) => {
+        let element = document.getElementById(customerId)
+        element.classList = "text-uppercase fst-italic btn btn-lg bg-light w-100 rounded-0 text-light bg-dark"
+        setTimeout(() => {
+            element.classList = "text-uppercase fst-italic btn btn-lg bg-light w-100 rounded-0"
+        }, 1000);
         setClientId(customerId)
         getAllMessageService(trainerId, customerId).then(res => {
             setMessage(res.data)
@@ -50,8 +56,6 @@ export default function MessagingComponent() {
         })
     }
 
-    const scrollToRef = useRef()
-
     useEffect(() => {
         const element = document.getElementById("chatBox")
         if (element !== null){
@@ -64,13 +68,14 @@ export default function MessagingComponent() {
         <div className="w-25 text-center mt-4">
             {clients.map(client =>
             <div key={client.id} className=" border-info border text-uppercase">
-                <button className="text-uppercase fst-italic btn btn-lg bg-light w-100 rounded-0" onClick={() => getMessage(authContext.id, client.id)}>{client.firstName + " " + client.lastName}</button>
+                <button id={client.id} className="text-uppercase fst-italic btn btn-lg bg-light w-100 rounded-0" onClick={() => getMessage(authContext.id, client.id)}>{client.firstName + " " + client.lastName}</button>
             </div>
             )}
         </div>
         {displayMsg ?
             <div className="w-75 text-center" >
                 <div className="mt-1 fs-5 shadow-sm text-light" >Message History</div>
+                {message.length === 0 ? <div>You dont have any message yet.</div> : ""}
                 <div className="w-75 mx-auto overflow-y-scroll m-1 border d-flex flex-column" style={{maxHeight:'30rem'}}>
                     {message.map(msg => 
                         <Row key={msg.id} className={`w-75 rounded-5 p-2 m-1 text-start bg-gradient ${msg.sender === 'Trainer' ? "bg-light" : "justify-content-end align-self-end bg-info-subtle"}`}>{msg.message}</Row>
@@ -83,7 +88,7 @@ export default function MessagingComponent() {
                 </div>
             </div>
         :
-            ""
+           ""
         }
     </div>
   )

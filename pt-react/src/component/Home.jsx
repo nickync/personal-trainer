@@ -49,32 +49,32 @@ export default function Home() {
                 <button type="button" data-bs-target="#textCaro" data-bs-slide-to="3" aria-label="Slide 3"></button>
             </div>
 
-            <div className="carousel-inner" style={{height:'40rem'}}>
+            <div className="carousel-inner mx-auto mb-3" style={{width:'80%'}}>
                 <div className="carousel-item active" >
-                    <div className="card-header">
-                        <h3 className="text-center fs-5 fst-italic fw-semibold text-dark text-body-emphasis" style={{textShadow:'1px 1px 1px black'}}>Our Personal Trainers are passionate about health and fitness, and through their work inspire and encourage others to develop healthy habits and routines</h3>
+                    <div className="carousel-caption">
+                        <h3 className="text-center fw fs-2 fw-semibold text-light text-uppercase" style={{textShadow:'2px 2px 2px black'}}>Our Personal Trainers are passionate about health and fitness, and through their work inspire and encourage others to develop healthy habits and routines</h3>
                     </div>
                     <img src={image2} className='w-75' alt='p'/>
 
                 </div>
 
                 <div className="carousel-item" >
-                    <div className="card-header">
-                        <h2 className="text-center fs-5 fst-italic fw-semibold text-dark text-body-emphasis" style={{textShadow:'1px 1px 1px black'}}>Perform fitness assessments to determine client’s level of fitness</h2>
+                    <div className="carousel-caption">
+                        <h2 className="text-center fw fs-2 f fw-semibold text-light text-uppercase" style={{textShadow:'2px 2px 2px black'}}>Perform fitness assessments to determine client’s level of fitness</h2>
                     </div>
                     <img src={image1} className='w-75' alt='p'/>
                 </div>
 
                 <div className="carousel-item" >
-                    <div className="card-header">
-                        <h2 className="text-center fs-5 fst-italic fw-semibold text-dark text-body-emphasis" style={{textShadow:'1px 1px 1px black'}}>Develop + implement tailored exercise regimens that meet client’s needs.</h2>
+                    <div className="carousel-caption">
+                        <h2 className="text-center fw fs-2 f fw-semibold text-light text-uppercase" style={{textShadow:'2px 2px 2px black'}}>Develop + implement tailored exercise regimens that meet client’s needs.</h2>
                     </div>
                     <img src={image3} className='w-75' alt='p'/>
                 </div>
 
                 <div className="carousel-item" >
-                    <div className="card-header">
-                        <h2 className="text-center fs-5 fst-italic fw-semibold text-dark text-body-emphasis" style={{textShadow:'1px 1px 1px black'}}>Communicate and follow-up with clients</h2>
+                    <div className="carousel-caption">
+                        <h2 className="text-center fw fs-2 f fw-semibold text-light text-uppercase" style={{textShadow:'2px 2px 2px black'}}>Communicate and follow-up with clients</h2>
                     </div>
                     <img src={image4} className='w-75' alt='p'/>
                 </div>
@@ -90,7 +90,7 @@ export default function Home() {
             </button>
 
         </div>
-        <div id='scroll-container' className='row bg-light bg-gradient text-dark'>
+        <div id='scroll-container' className='row bg-light bg-gradient text-dark mt-3'>
             <div id='scroll-text' className='fs-4 fw-bolder fst-italic'>Our Top Trainers...</div>
         </div>
         {trainers

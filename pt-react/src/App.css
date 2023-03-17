@@ -96,3 +96,7 @@
   -moz-background-clip: text;
   -moz-text-fill-color: transparent;
 }
+
+.checked {
+  color: orange;
+}

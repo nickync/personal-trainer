@@ -35,12 +35,12 @@ export default function SignupComponent() {
     const navigate = useNavigate()
 
     const updateButtonState = () => {
-        (role !== '' && !alert && username !== '')?  setButtonState(false) : setButtonState(true)
+        (role !== '' && !alert && username !== '' && password !== '' && firstName !== '' && lastName !== '') ?  setButtonState(false) : setButtonState(true)
     }
 
     useEffect(() => {
         updateButtonState()
-    },[role, alert, username])
+    },[role, alert, username, password, firstName, lastName])
 
     const updateUsername = (event) => {
         setUsername(event.target.value)

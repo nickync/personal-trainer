@@ -7,6 +7,7 @@ export default function TrainerComponent() {
     const navigate = useNavigate()
     const [location, setLocation] = useState('')
     const [rating, setRating] = useState(0)
+    const [star, setStar] = useState(5)
 
     useEffect(
         () => getTrainers,[]
@@ -26,10 +27,10 @@ export default function TrainerComponent() {
         setLocation(event.target.value)
     }
 
-    const handleRatingChange = (event) => {
-        event.preventDefault()
-        setRating(event.target.value)
-    }
+    // const handleRatingChange = (event) => {
+    //     event.preventDefault()
+    //     setRating(event.target.value)
+    // }
     
     // useEffect(() => {
     //     if (location !== '' && trainers !== []){
@@ -40,28 +41,36 @@ export default function TrainerComponent() {
     //     }
     // },[rating, location])
 
+    const getStar = (number) => {
+        setRating(number)
+        setStar(number)
+    }
+
+    useEffect(() => {
+        
+    }, [star])
+
   return (
-    <div className='container'>
+    <div className='container-fluid'>
         <div>
-            <label>By Location</label>
-            <select value={location} onChange={handleLocationChange}>
+            <label className='fw-bold'>Location:</label>
+            <select value={location} onChange={handleLocationChange} className="rounded bg-dark bg-gradient text-light">
                 <option>New York</option>
                 <option>Florida</option>
                 <option>Arkansas</option>
             </select>
         </div>
-        <div>
-            <label>By Rating</label>
-            <select value={rating} onChange={handleRatingChange}>
-                <option>5</option>
-                <option>4</option>
-                <option>3</option>
-                <option>2</option>
-                <option>1</option>
-            </select>
+        <div className='d-flex'>
+            <div className='fw-bold'>Rating: </div>
+            <div>
+                <button className={`fa fa-star p-0 m-0 btn ${star >= 1 ? "checked" : ''}`} onClick={() => getStar(1)}></button>
+                <button className={`fa fa-star p-0 m-0 btn ${star >= 2 ? "checked" : ''}`} onClick={() => getStar(2)}></button>
+                <button className={`fa fa-star p-0 m-0 btn ${star >= 3 ? "checked" : ''}`} onClick={() => getStar(3)}></button>
+                <button className={`fa fa-star p-0 m-0 btn ${star >= 4 ? "checked" : ''}`} onClick={() => getStar(4)}></button>
+                <button className={`fa fa-star p-0 m-0 btn ${star >= 5 ? "checked" : ''}`} onClick={() => getStar(5)}></button>
+            </div>
         </div>
-
-        <div className='container-fluid text-center justify-content-center d-flex flex-wrap'>
+        <div className='text-center justify-content-center d-flex flex-wrap'>
             {trainers
                 .filter(trainer => location !== '' ? trainer.location === location : trainer)
                 .filter(trainer => rating !== 0 ? trainer.rating >= rating : trainer)
