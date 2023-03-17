@@ -6,8 +6,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background: linear-gradient(to top right, #ccffff 37%, #002a66 100%);
-  min-height: 100%;
-  max-height: max-content;
+  height: -webkit-fill-available;
+  min-height: 100vh;
 }
 
 html {
