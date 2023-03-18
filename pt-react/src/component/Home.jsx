@@ -41,11 +41,6 @@ export default function Home() {
         }
     }
 
-    const returnReview = (id) => {
-        let top = review.filter(review => review.trainerId === id).review
-        console.log(top)
-    }
-
     useEffect(() => {
         getReviews()
         console.log(review)
@@ -119,7 +114,10 @@ export default function Home() {
                             <div className='text-start fst-italic'>Rating: {trainer.rating.toFixed(2)}</div>
                             <div className='text-start fst-italic'>
                                 <p className='fw-bolder text-primary'>What our customer says about <span className='text-uppercase'>{trainer.firstName}</span> :</p>
-                                <p className='ms-2'>{returnReview(trainer.id)}</p>
+                                {/* <p className='ms-2'>{returnReview(trainer.id)}</p> */}
+                                {review.filter(review => review.trainerId === trainer.id).map(review => 
+                                    <p className='ms-2'>{review.review}</p>
+                                    )}
                             </div>
                         </div>
                         <div className='col-lg-4 d-flex flex-column align-items-center'>
