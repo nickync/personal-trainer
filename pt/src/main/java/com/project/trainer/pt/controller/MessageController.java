@@ -25,4 +25,5 @@ public class MessageController {
         List<Message> messages = messageRepository.findAll();
         return messages.stream().filter( i -> Objects.equals(i.getTrainerId(), trainerId) && Objects.equals(i.getCustomerId(), customerId)).toList();
     }
+
 }

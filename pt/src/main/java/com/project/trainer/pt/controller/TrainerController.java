@@ -1,7 +1,9 @@
 package com.project.trainer.pt.controller;
 
+import com.project.trainer.pt.model.Review;
 import com.project.trainer.pt.model.Trainer;
 import com.project.trainer.pt.model.TrainingPlan;
+import com.project.trainer.pt.repository.ReviewRepository;
 import com.project.trainer.pt.repository.TrainerRepository;
 import com.project.trainer.pt.repository.TrainingPlanRepository;
 import com.project.trainer.pt.repository.UserRepository;
@@ -22,6 +24,9 @@ public class TrainerController {
 
     @Autowired
     private TrainingPlanRepository trainingPlanRepository;
+
+    @Autowired
+    private ReviewRepository reviewRepository;
 
     @GetMapping("/trainers")
     public List<Trainer> getAllTrainers(){
@@ -79,6 +84,5 @@ public class TrainerController {
     public void deletePlan(@RequestParam Long id){
         trainingPlanRepository.deleteById(id);
     }
-
 
 }
