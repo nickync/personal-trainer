@@ -47,13 +47,40 @@ export default function LoginComponent() {
         navigate('/sign-up')
     }
 
+    const demoTrainerLogin = async () => {
+        if (authContext.login('trainer', 1)){
+            let role = null
+            await getRoleService(username).then(res => {
+                role = res.data
+            }).catch(err => {
+                console.log(err)
+            })
+            role === 'TRAINER' ? navigate('/trainer/details') : navigate('/customer/details')
+        }
+    }
+
+    const demoCustomerLogin = async () => {
+        if (authContext.login('customer', 1)){
+            let role = null
+            await getRoleService(username).then(res => {
+                role = res.data
+            }).catch(err => {
+                console.log(err)
+            })
+            role === 'TRAINER' ? navigate('/trainer/details') : navigate('/customer/details')
+        }
+    }
+
   return (
     <div className='container-fluid text-center'>
         <div className='row text-center'>
             <div className='text-gray fw-bolder fs-4'>Welcome back!</div>
         </div>
         <div className='row text-center'>
-            <div className='col-sm-4'></div>
+            <div className='col-sm-4'>
+                <button className='btn btn-sm btn-dark me-3' onClick={demoTrainerLogin}>Demo Trainer</button>
+                <button className='btn btn-sm btn-dark' onClick={demoCustomerLogin}>Demo Customer</button>
+            </div>
             <div className='col-sm-4'>
                 {alert ? <div className='text-danger fw-bold'>Please enter your username and password.</div> : " "}
                 {alertPassword ? <div className='text-danger fw-bold'>Your username and password does not match.</div> : " "}

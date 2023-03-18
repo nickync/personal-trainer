@@ -66,6 +66,7 @@ export default function ViewTrainingPlanComponent(){
         if (customer !== ''){
             getAllPlansService(customer.trainerId, customer.id).then(res => {
                 setPlans(res.data)
+                console.log(res.data)
             })   
         }
     }
@@ -82,6 +83,7 @@ export default function ViewTrainingPlanComponent(){
     useEffect(() => {
         getAllPlans()
     },[customer])
+
     return(
         <div className="container-fluid">
             <h2 className="text-center font-monospace fs-2 fw-bolder my-3" style={{'textShadow': '3px 3px 9px white'}}>Training Plan</h2>
@@ -136,7 +138,7 @@ export default function ViewTrainingPlanComponent(){
                         <Col></Col>
                 </Row>)}
             </div>
-            <div className="w-75 text-center mx-auto">
+            <div className="w-75 text-center mx-auto pb-5">
                 <Row className="justify-content-center font-monospace fs-4 fw-bolder my-3" style={{'textShadow': '3px 3px 3px white'}} >Plan List</Row>
                 <Row>
                     <Col>Date</Col>

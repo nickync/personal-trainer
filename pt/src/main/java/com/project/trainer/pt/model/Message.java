@@ -1,14 +1,12 @@
 package com.project.trainer.pt.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Message {
     @Id
-    @GeneratedValue
+    @SequenceGenerator(name = "TABLE", sequenceName = "SEQ", initialValue = 10)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "TABLE")
     private Long id;
 
     @Column

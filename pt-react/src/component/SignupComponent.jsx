@@ -31,6 +31,7 @@ export default function SignupComponent() {
     const [alert, setAlert] = useState(false)
     const [usernameAlert, setUsernameAlert] = useState(false)
     const [registrationState, setRegistrationState] = useState(false)
+    const [usernameReq, setUsernameReq] = useState(false)
 
     const navigate = useNavigate()
 
@@ -45,6 +46,7 @@ export default function SignupComponent() {
     const updateUsername = (event) => {
         setUsername(event.target.value)
         setUsernameAlert(false)
+        setUsernameReq(false)
     }
 
     const updateTempPassword = (event) => {
@@ -122,34 +124,36 @@ export default function SignupComponent() {
     const handleSubmit = (event) => {
         event.preventDefault()
         let user = {username: username, password: password, role:role}
-        signUpService(user).then(res => {
-            if (res.status === 200){
-                if (role === 'TRAINER'){
-                    let trainer = {id:res.data['userId'], firstName: firstName, lastName: lastName, bio:bio, role:role, img:img, yearsOfExp:years, motto:motto, background:background, location:location, price:price, rating:0}
-                    trainerSignUpService(trainer).then(res => {
-                        setRegistrationState(true)
-                        setTimeout(() => {
+        if (username.length <= 3){
+            setUsernameReq(true)
+        } else{
+            signUpService(user).then(res => {
+                if (res.status === 200){
+                    if (role === 'TRAINER'){
+                        let trainer = {id:res.data['userId'], firstName: firstName, lastName: lastName, bio:bio, role:role, img:img, yearsOfExp:years, motto:motto, background:background, location:location, price:price, rating:0}
+                        trainerSignUpService(trainer).then(res => {
+                            setRegistrationState(true)
+                            setTimeout(() => {
+                                navigate('/login')
+                            }, 3000);
+                        }).catch(err => {
+                            console.log('Fail to create trainer')
+                        })
+                    } else if (role === 'CUSTOMER'){
+                        let customer = {id:res.data['userId'], firstName:firstName, lastName:lastName, age:age, goal:goal, weight:weight, height:height, img:img}
+                        console.log(customer)
+                        customerSignUpService(customer).then(res => {
                             navigate('/login')
-                        }, 3000);
-                    }).catch(err => {
-                        console.log('Fail to create trainer')
-                    })
-                } else if (role === 'CUSTOMER'){
-                    let customer = {id:res.data['userId'], firstName:firstName, lastName:lastName, age:age, goal:goal, weight:weight, height:height, img:img}
-                    console.log(customer)
-                    customerSignUpService(customer).then(res => {
-                        navigate('/login')
-                    }).catch(res => {
-                        console.log('Fail to create customer')
-                    })
+                        }).catch(res => {
+                            console.log('Fail to create customer')
+                        })
+                    }
                 }
-            }
-        }).catch(err => {
-            console.log('Fail to create user')
-            setUsernameAlert(true)
-        })
-
-        
+            }).catch(err => {
+                console.log('Fail to create user')
+                setUsernameAlert(true)
+            })
+        } 
     }
 
   return (
@@ -159,6 +163,7 @@ export default function SignupComponent() {
                 <Col className='col-sm-4 me-5'>
                     <Form.Group className='mb-2' controlId='username'>
                         <Form.Label>Username {usernameAlert ? <span className='text-danger fw-bolder'>Username has already been used, please use a different one.</span> :''} </Form.Label>
+                        <Form.Label>{usernameReq ? <span className='text-danger fw-bolder'>Username needs to be longer than 3.</span> :''} </Form.Label>
                         <Form.Control type='username' placeholder='Enter username' value={username} onChange={updateUsername}/>
                     </Form.Group>
                     <Form.Group className='mb-3' controlId='username'>

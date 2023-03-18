@@ -2,9 +2,11 @@ package com.project.trainer.pt.controller;
 
 import com.project.trainer.pt.model.Customer;
 import com.project.trainer.pt.model.Review;
+import com.project.trainer.pt.model.Trainer;
 import com.project.trainer.pt.model.TrainingPlan;
 import com.project.trainer.pt.repository.CustomerRepository;
 import com.project.trainer.pt.repository.ReviewRepository;
+import com.project.trainer.pt.repository.TrainerRepository;
 import com.project.trainer.pt.repository.TrainingPlanRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,6 +26,9 @@ public class CustomerController {
 
     @Autowired
     private ReviewRepository reviewRepository;
+
+    @Autowired
+    private TrainerRepository trainerRepository;
 
     @GetMapping("/customers/get")
     public Customer getCustomerById(@RequestParam Long id){
@@ -77,7 +82,11 @@ public class CustomerController {
 
     @PostMapping("/sendAReview")
     public void sendReview(@RequestBody Review review){
-        System.out.println(review.getTrainerId());
+        Trainer trainer = trainerRepository.findById(review.getTrainerId()).get();
+        List<Review> reviews = reviewRepository.findAll().stream().filter(i -> i.getTrainerId().equals(review.getTrainerId())).toList();
+        Long rating =(long) (reviews.stream().map(Review::getRating).reduce(0.0, Double::sum) / reviews.size());
+        trainer.setRating(rating);
+        trainerRepository.save(trainer);
         reviewRepository.save(review);
     }
 
