@@ -33,7 +33,7 @@ export default function TrainerInformation(){
       }
     
     return(
-        <Container>
+        <Container className="container-fluid" style={{height:'80vh'}}>
             {trainers.filter(i => i.id === Number(id))
             .map(trainer =>
             <div key={id}>
@@ -41,7 +41,7 @@ export default function TrainerInformation(){
                     <Col className="text-center fs-1 text-uppercase text-black-50 fw-bold fst-italic shadow my-2"> {trainer.firstName + " " +trainer.lastName} </Col>
                 </Row>
                 <Row className="my-5 d-flex align-items-center">
-                    <Col><img className="card-img-top" height={'100%'} src={trainer.img} alt="profile"/></Col>
+                    <Col><img className="card-img-top" style={{height:'50vh'}} src={trainer.img} alt="profile"/></Col>
                     <Col className='text-center fs-4 fst-italic'>
                         <p><Badge bg='dark'>{trainer.bio}</Badge></p>
                         <p>${trainer.price?.toFixed(2)} per hour</p>

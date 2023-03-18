@@ -12,11 +12,11 @@ export default function FooterComponent() {
             <div className="blockquote fw-light text-light-emphasis fst-italic fs-5">I am the master of my fate, I am the captain of my soul.</div>
             <div className="blockquote-footer text-end">--William Ernest Henley</div>
           </div>
-          <div className="text-light text-gradient">
-            <div className="fs-6 fst-italic fw-light me-lg-5 pe-lg-5">Contact:</div>
-            <div className="fs-6 fst-italic fw-light text-end">(123) 456-789</div>
+          <div className="text-light text-gradient" style={{fontSize:'13px'}}>
+            <div className="fst-italic fw-light mt-3 me-lg-5 pe-lg-5">Contact:</div>
+            <div className="fst-italic fw-lighter text-end">(123) 456-789</div>
             <div className="align-content-end">
-              <div className="fst-italic me-lg-5 pe-lg-5">Address:</div> 
+              <div className="fst-italic me-lg-5 pe-lg-5 ">Address:</div> 
               <div className="text-light fw-lighter text-end">270 Park Ave</div>
               <div className="fw-lighter text-end">Jonesboro, DC</div>
             </div>

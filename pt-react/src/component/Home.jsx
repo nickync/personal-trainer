@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { getAllTrainers } from './api/ApiService'
+import { getAllTrainers, getTrainerReviewService } from './api/ApiService'
 import { Badge } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
 import image1 from '../image1.jpg'
@@ -9,7 +9,7 @@ import image4 from '../image4.jpg'
 
 export default function Home() {
     const [trainers, setTrainers] = useState([])
-
+    const [review, setReview] = useState([])
     const navigate = useNavigate()
 
     useEffect(
@@ -19,7 +19,6 @@ export default function Home() {
     const getTrainers = () => {
         getAllTrainers().then(res => {
             setTrainers(res.data)
-    
         }).catch(err => {
             console.log(err)
         })
@@ -29,18 +28,32 @@ export default function Home() {
         navigate('/trainer/information/'+id)
     }
 
+    const getReviews = () => {
+        if (trainers.length !== 0){
+            trainers
+                .filter(trainer => trainer.rating > 4)
+                .map(trainer => {
+                    getTrainerReviewService(trainer.id).then(res => {
+                        let topReview = res.data.find(i => (i.rating > 4))
+                        setReview((preState) => [...preState, topReview])
+                })
+            })
+        }
+    }
+
+    const returnReview = (id) => {
+        let top = review.filter(review => review.trainerId === id).review
+        console.log(top)
+    }
+
+    useEffect(() => {
+        getReviews()
+        console.log(review)
+    },[trainers])
+
   return (
     <div className='container-fluid text-center'>
         <h1 id='header-pt' className='fw-bold fst m-3' style={{textShadow:'2px 2px 2px black'}}>Welcome to Personal Trainer!</h1>
-        {/* <div>
-            <ul>
-                <li>Our Personal Trainers are passionate about health and fitness, and through their work inspire and encourage others to develop healthy habits and routines</li>
-                <li>Perform fitness assessments to determine client’s level of fitness</li>
-                <li>Develop + implement tailored exercise regimens that meet client’s needs</li>
-                <li>Motivate and inspire clients to achieve results and reach goals</li>
-                <li>Communicate and follow-up with clients</li>
-            </ul>
-        </div> */}
         <div id="textCaro" className="carousel slide" data-bs-ride="carousel">
             <div className="carousel-indicators pt-4">
                 <button type="button" data-bs-target="#textCaro" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
@@ -55,7 +68,6 @@ export default function Home() {
                         <h3 className="text-center fw fs-2 fw-semibold text-light text-uppercase" style={{textShadow:'2px 2px 2px black'}}>Our Personal Trainers are passionate about health and fitness, and through their work inspire and encourage others to develop healthy habits and routines</h3>
                     </div>
                     <img src={image2} className='w-75' alt='p'/>
-
                 </div>
 
                 <div className="carousel-item" >
@@ -94,7 +106,7 @@ export default function Home() {
             <div id='scroll-text' className='fs-4 fw-bolder fst-italic'>Our Top Trainers...</div>
         </div>
         {trainers
-            .filter(trainer => trainer.rating > 3)
+            .filter(trainer => trainer.rating > 4)
             .map(trainer => 
                 <div className='p-2 mt-5 mb-5' key={trainer.id}>
                     <div className='row align-items-center'>
@@ -106,8 +118,8 @@ export default function Home() {
                         <div className='col-lg-4'>
                             <div className='text-start fst-italic'>Rating: {trainer.rating.toFixed(2)}</div>
                             <div className='text-start fst-italic'>
-                                <p className='fw-bolder text-primary'>What our customer says about {trainer.firstName} :</p>
-                                <p className='ms-2'>llalallalalalalallalaaa</p>
+                                <p className='fw-bolder text-primary'>What our customer says about <span className='text-uppercase'>{trainer.firstName}</span> :</p>
+                                <p className='ms-2'>{returnReview(trainer.id)}</p>
                             </div>
                         </div>
                         <div className='col-lg-4 d-flex flex-column align-items-center'>
@@ -117,7 +129,6 @@ export default function Home() {
                     </div>
                 </div>
             )}
-
     </div>
   )
 }

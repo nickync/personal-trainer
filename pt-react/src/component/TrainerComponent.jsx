@@ -76,7 +76,7 @@ export default function TrainerComponent() {
                 .filter(trainer => rating !== 0 ? trainer.rating >= rating : trainer)
                 .map(trainer => 
                     <div className="card m-3 p-1 border-secondary" style={{width:"30rem"}} key={trainer.id}>
-                        <img src={trainer.img} className="card-img-top" height={'100%'} alt="#"/>
+                        <img src={trainer.img} className="card-img-top" height={'350rem'} alt="#"/>
                         <div className="card-body">
                             <h5 className="card-title text-uppercase">{trainer.firstName + ' ' + trainer.lastName}</h5>
                             <p className="card-text">{trainer.bio}</p>
