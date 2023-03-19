@@ -38,6 +38,10 @@ public class TrainerController {
         return trainerRepository.findById(id).orElseThrow();
     }
 
+    @GetMapping
+    public String startUp(){
+        return "backend is running";
+    }
     @PostMapping("/trainers/update")
     public void updateTrainer(@RequestBody Trainer trainer){
         trainer.setRating(trainerRepository.findById(trainer.getId()).get().getRating());
