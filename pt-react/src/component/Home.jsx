@@ -6,6 +6,7 @@ import image1 from '../image1.jpg'
 import image2 from '../image2.jpg'
 import image3 from '../image3.jpg'
 import image4 from '../image4.jpg'
+import axios from 'axios'
 
 export default function Home() {
     const [trainers, setTrainers] = useState([])
@@ -44,6 +45,8 @@ export default function Home() {
     useEffect(() => {
         getReviews()
     },[trainers])
+
+    axios.get("http://pt-env.eba-25hm4yct.us-east-1.elasticbeanstalk.com/trainers").then(res => console.log(res.data)).catch(err => console.log('asdf', err))
 
   return (
     <div className='container-fluid text-center'>
