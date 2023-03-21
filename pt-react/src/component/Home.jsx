@@ -13,8 +13,9 @@ export default function Home() {
     const [review, setReview] = useState([])
     const navigate = useNavigate()
 
-    useEffect(
-        () => getTrainers, []
+    useEffect(() => {
+        getTrainers()
+    },[]
     )
 
     const getTrainers = () => {

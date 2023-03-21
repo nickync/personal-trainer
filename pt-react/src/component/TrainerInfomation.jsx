@@ -8,9 +8,9 @@ export default function TrainerInformation(){
     const [trainers, setTrainers] = useState([])
     const {id} = useParams()
     
-    useEffect(
-        () => getTrainers, []
-    )
+    useEffect(() => {
+        getTrainers()
+    }, [])
 
     const getTrainers = () => {
         getAllTrainers().then(res => {

@@ -9,9 +9,9 @@ export default function TrainerComponent() {
     const [rating, setRating] = useState(0)
     const [star, setStar] = useState(5)
 
-    useEffect(
-        () => getTrainers,[]
-    )
+    useEffect(() => {
+        getTrainers()
+    },[])
 
     const getTrainers = () => {
         getAllTrainers().then(res => {
