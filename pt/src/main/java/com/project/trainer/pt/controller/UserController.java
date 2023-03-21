@@ -32,4 +32,9 @@ public class UserController {
         return userRepository.findByUsername(username).getUserId();
     }
 
+    @GetMapping("/")
+    public String home(){
+        return "home";
+    }
+
 }

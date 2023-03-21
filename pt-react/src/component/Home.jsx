@@ -46,8 +46,6 @@ export default function Home() {
         getReviews()
     },[trainers])
 
-    axios.get("http://pt-env.eba-25hm4yct.us-east-1.elasticbeanstalk.com/trainers").then(res => console.log(res.data)).catch(err => console.log('asdf', err))
-
   return (
     <div className='container-fluid text-center'>
         <h1 id='header-pt' className='fw-bold fst m-3' style={{textShadow:'2px 2px 2px black'}}>Welcome to Personal Trainer!</h1>

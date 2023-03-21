@@ -51,7 +51,7 @@ public class JwtSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity, HandlerMappingIntrospector introspector) throws Exception {
         return httpSecurity
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/trainers", "/trainers/sign-up","/customers/sign-up", "/authenticate", "/sign-up", "customer  /book/**", "/getReview").permitAll()
+                        .requestMatchers("/trainers", "/trainers/sign-up","/customers/sign-up", "/authenticate", "/sign-up", "customer  /book/**", "/getReview", "/getRole").permitAll()
                         .requestMatchers(PathRequest.toH2Console()).permitAll()
                         .requestMatchers(HttpMethod.OPTIONS, "/**")
                         .permitAll()
