@@ -28,19 +28,20 @@ export default function LoginComponent() {
         event.preventDefault()
         if (username == '' || password == ''){
             setAlert(true)
-        }
-        
-        if (await authContext.login(username, password)){
-            let role = null
-            await getRoleService(username).then(res => {
-                role = res.data
-            }).catch(err => {
-                console.log(err)
-            })
-            role === 'TRAINER' ? navigate('/trainer/details') : navigate('/customer/details')
         } else {
-            setAlertPassword(true)
+            if (await authContext.login(username, password)){
+                let role = null
+                await getRoleService(username).then(res => {
+                    role = res.data
+                }).catch(err => {
+                    console.log(err)
+                })
+                role === 'TRAINER' ? navigate('/trainer/details') : navigate('/customer/details')
+            } else {
+                setAlertPassword(true)
+            }
         }
+    
     }
 
     const handleSignUp = () => {
@@ -55,6 +56,7 @@ export default function LoginComponent() {
             }).catch(err => {
                 console.log(err)
             })
+            console.log(role)
             role === 'TRAINER' ? navigate('/trainer/details') : navigate('/customer/details')
         }
     }

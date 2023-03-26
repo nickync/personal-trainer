@@ -28,9 +28,9 @@ export default function ManageClientComponent() {
         <div>
             <h2 className="fst-italic">Your clients</h2>
         </div>
-        <div className="d-flex">
+        <div className="d-flex flex-wrap flex-row justify-content-center">
             {clients.map(client => 
-                <div className="card m-3 p-1 border-secondary" style={{width:"30rem"}} key={client.id}>
+                <div className="card m-3 p-1 border-secondary" style={{width:"20rem"}} key={client.id}>
                     <img src={client.img} className="card-img-top" height={'100%'} alt="#"/>
                     <div className="card-body">
                         <h5 className="card-title text-uppercase">{client.firstName + ' ' + client.lastName}</h5>

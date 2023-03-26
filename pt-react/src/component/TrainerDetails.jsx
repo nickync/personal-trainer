@@ -47,7 +47,7 @@ export default function TrainerDetails() {
       <Row className='text-end'>
         <Col><button onClick={handleEdit} className='btn btn-sm btn-dark'>Edit</button></Col>
       </Row>
-      <Row>
+      <Row className='phoneColumn'>
         <Col><img className="card-img-top" style={{height:'100%'}} alt="#" src={trainer.img}></img></Col>
         <Col>
           <Row className='justify-content-center fs-1 text-uppercase'> {trainer.firstName + " " + trainer.lastName}</Row>

@@ -58,31 +58,31 @@ export default function Home() {
                 <button type="button" data-bs-target="#textCaro" data-bs-slide-to="3" aria-label="Slide 3"></button>
             </div>
 
-            <div className="carousel-inner mx-auto mb-3" style={{width:'80%'}}>
+            <div className="carousel-inner mx-auto mb-3" style={{height:'80%'}}>
                 <div className="carousel-item active" >
                     <div className="carousel-caption">
-                        <h3 className="text-center fw fs-2 fw-semibold text-light text-uppercase" style={{textShadow:'2px 2px 2px black'}}>Our Personal Trainers are passionate about health and fitness, and through their work inspire and encourage others to develop healthy habits and routines</h3>
+                        <h3 className="text-center fw fs-2 fw-semibold text-light text-uppercase caro-head" style={{textShadow:'2px 2px 2px black'}}>Our Personal Trainers are passionate about health and fitness, and through their work inspire and encourage others to develop healthy habits and routines</h3>
                     </div>
                     <img src={image2} className='w-75' alt='p'/>
                 </div>
 
                 <div className="carousel-item" >
                     <div className="carousel-caption">
-                        <h2 className="text-center fw fs-2 f fw-semibold text-light text-uppercase" style={{textShadow:'2px 2px 2px black'}}>Perform fitness assessments to determine client’s level of fitness</h2>
+                        <h2 className="text-center fw fs-2 f fw-semibold text-light text-uppercase caro-head" style={{textShadow:'2px 2px 2px black'}}>Perform fitness assessments to determine client’s level of fitnes caro-heads</h2>
                     </div>
                     <img src={image1} className='w-75' alt='p'/>
                 </div>
 
                 <div className="carousel-item" >
                     <div className="carousel-caption">
-                        <h2 className="text-center fw fs-2 f fw-semibold text-light text-uppercase" style={{textShadow:'2px 2px 2px black'}}>Develop + implement tailored exercise regimens that meet client’s needs.</h2>
+                        <h2 className="text-center fw fs-2 f fw-semibold text-light text-uppercase caro-head" style={{textShadow:'2px 2px 2px black'}}>Develop + implement tailored exercise regimens that meet client’s needs.</h2>
                     </div>
                     <img src={image3} className='w-75' alt='p'/>
                 </div>
 
                 <div className="carousel-item" >
                     <div className="carousel-caption">
-                        <h2 className="text-center fw fs-2 f fw-semibold text-light text-uppercase" style={{textShadow:'2px 2px 2px black'}}>Communicate and follow-up with clients</h2>
+                        <h2 className="text-center fw fs-2 f fw-semibold text-light text-uppercase caro-head" style={{textShadow:'2px 2px 2px black'}}>Communicate and follow-up with clients</h2>
                     </div>
                     <img src={image4} className='w-75' alt='p'/>
                 </div>

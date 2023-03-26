@@ -83,26 +83,26 @@ export default function CustomerMessagingComponent() {
     },[message])
 
   return (
-    <>
+    <div>
         {
             noHistory ? 
                 <div className="fs-3 text-center">You have no message history.</div>
             :
-            <div className="container-fluid d-flex">
+            <div className="container-fluid d-flex chatColumn">
                 <div className="w-25 text-center mt-4">
                     <div key={trainerId} className=" border-info border text-uppercase">
                         <button className="text-uppercase fst-italic btn btn-lg bg-light w-100 rounded-0" onClick={() => getMessage(trainer.id, authContext.id)}>{trainer.firstName + " " + trainer.lastName}</button>
                     </div>
-                    {trainers.map(trainer =>
+                    {/* {trainers.filter(trainer => trainer.id !== trainerId).map(trainer =>
                     <div key={trainer.id} className=" border-info border text-uppercase">
                         <button className="btn btn-lg bg-light w-100 rounded-0" onClick={() => getMessage(trainer.id, authContext.id)}>{trainer.firstName + " " + trainer.lastName}</button>
                     </div>
-                    )}
+                    )} */}
                 </div>
                 {displayMsg ?
                     <div className="w-75 text-center" >
                         <div className="mt-1 fs-5 shadow-sm text-light" >Message History</div>
-                        <div className="w-75 mx-auto overflow-y-scroll m-1 border d-flex flex-column" style={{maxHeight:'30rem'}}>
+                        <div className="w-100 mx-auto overflow-y-scroll m-1 border d-flex flex-column" style={{maxHeight:'30rem'}}>
                             {message.map(msg => 
                                 <Row key={msg.id} className={`w-75 rounded-5 p-2 m-1 text-start bg-gradient ${msg.sender === 'Trainer' ? "bg-light" : "justify-content-end align-self-end bg-info-subtle"}`}>{msg.message}</Row>
                             )}
@@ -118,6 +118,6 @@ export default function CustomerMessagingComponent() {
                 }
             </div>
         }
-    </>
+    </div>
   )
 }

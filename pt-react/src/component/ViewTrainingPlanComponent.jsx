@@ -66,7 +66,6 @@ export default function ViewTrainingPlanComponent(){
         if (customer !== ''){
             getAllPlansService(customer.trainerId, customer.id).then(res => {
                 setPlans(res.data)
-                console.log(res.data)
             })   
         }
     }
@@ -83,7 +82,6 @@ export default function ViewTrainingPlanComponent(){
     useEffect(() => {
         getAllPlans()
     },[customer])
-
     return(
         <div className="container-fluid">
             <h2 className="text-center font-monospace fs-2 fw-bolder my-3" style={{'textShadow': '3px 3px 9px white'}}>Training Plan</h2>
@@ -92,8 +90,7 @@ export default function ViewTrainingPlanComponent(){
                     <Col><button className="btn btn-sm btn-dark"  onClick={prevWeek}>Previous Week</button></Col>
                     <Col><button className="btn btn-sm btn-dark" onClick={nextWeek}>Next week</button></Col>
                 </Row>
-                <Row className="">
-                    <Col></Col>
+                <Row className="weekday">
                     <Col className="fw-bold text-light fst-italic">Sunday</Col>
                     <Col className="fw-bold text-light fst-italic">Mondy</Col>
                     <Col className="fw-bold text-light fst-italic">Tuesday</Col>
@@ -101,20 +98,19 @@ export default function ViewTrainingPlanComponent(){
                     <Col className="fw-bold text-light fst-italic">Thursday</Col>
                     <Col className="fw-bold text-light fst-italic">Friday</Col>
                     <Col className="fw-bold text-light fst-italic">Saturday</Col>
-                    <Col></Col>
                 </Row>
                 
                 {month.map(week => 
-                    <Row className="container-fluid" key={Math.random()}>
-                        <Col></Col>
+                    <Row className="container-fluid p-0 m-0" key={Math.random()}>
+                
                         {week.map(day =>
-                        <Col key={day.substring(0,10)} className="card" style={{width:"10rem", height:"10rem"}}>
+                        <Col key={day.substring(0,10)} className="card" style={{width:"20rem", height:"10rem"}}>
                             <div className="fw-bold text-center">{day.substring(5,10)}</div>
                             {plans.filter(plan => plan.date === day.substring(0,10))
                                 .map(plan => 
                                 <span key={plan.id} >
                                     {plan.completed ? 
-                                        <Popup trigger={<button className='btn btn-sm btn-success bg-gradient'>{plan.title}</button>} position='bottom center'>
+                                        <Popup trigger={<button className='btn btn-sm btn-success bg-gradient plan'>{plan.title}</button>} position='bottom center'>
                                             <div className="card py-2 px-2 bg-dark bg-gradient text-light">
                                                 <div className="fst-3 fw-bold text-uppercase">{plan.title}</div>
                                                 <div className="fst-6 fst-italic">{plan.details}</div>
@@ -122,25 +118,24 @@ export default function ViewTrainingPlanComponent(){
                                             </div>
                                         </Popup> 
                                         :
-                                        <Popup trigger={<button className='btn btn-sm btn-danger bg-gradient'>{plan.title}</button>} position='bottom center'>
-                                        <div className="card py-2 px-2 bg-dark bg-gradient text-light">
-                                            <div className="fst-3 fw-bold text-uppercase">{plan.title}</div>
-                                            <div className="fst-6 fst-italic">{plan.details}</div>
-                                            <button className="btn btn-sm btn-dark btn-outline-light" onClick={() => setPlanStatus(plan.id, plan.completed)}>Update Status</button>
-                                        </div>
-                                    </Popup> 
+                                        <Popup trigger={<button className='btn btn-sm btn-danger bg-gradient plan'>{plan.title}</button>} position='bottom center'>
+                                            <div className="card py-2 px-2 bg-dark bg-gradient text-light">
+                                                <div className="fst-3 fw-bold text-uppercase">{plan.title}</div>
+                                                <div className="fst-6 fst-italic">{plan.details}</div>
+                                                <button className="btn btn-sm btn-dark btn-outline-light" onClick={() => setPlanStatus(plan.id, plan.completed)}>Update Status</button>
+                                            </div>
+                                        </Popup> 
                                     }
 
                                 </span>)
                             }
                         </Col>
                         )}
-                        <Col></Col>
                 </Row>)}
             </div>
-            <div className="w-75 text-center mx-auto pb-5">
+            <div className="w-75 text-center mx-auto">
                 <Row className="justify-content-center font-monospace fs-4 fw-bolder my-3" style={{'textShadow': '3px 3px 3px white'}} >Plan List</Row>
-                <Row>
+                <Row className="weekday">
                     <Col>Date</Col>
                     <Col>Title</Col>
                     <Col>Details</Col>
@@ -148,7 +143,7 @@ export default function ViewTrainingPlanComponent(){
                     <Col>Action</Col>
                 </Row>
                 {plans.map(plan => 
-                    <Row key={plan.id} className='border border-secondary'>
+                    <Row key={plan.id} className='border border-secondary plan-details'>
                         <Col>{plan.date}</Col>
                         <Col>{plan.title}</Col>
                         <Col>{plan.details}</Col>

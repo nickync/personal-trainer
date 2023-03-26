@@ -149,8 +149,7 @@ export default function SetTrainingPlanComponent() {
                 <Col><button className="btn btn-sm btn-dark"  onClick={prevWeek}>Previous Week</button></Col>
                 <Col><button className="btn btn-sm btn-dark" onClick={nextWeek}>Next week</button></Col>
             </Row>
-            <Row className="">
-                <Col></Col>
+            <Row className="container-fluid weekday">
                 <Col className="fw-bold text-light fst-italic">Sunday</Col>
                 <Col className="fw-bold text-light fst-italic">Mondy</Col>
                 <Col className="fw-bold text-light fst-italic">Tuesday</Col>
@@ -158,19 +157,17 @@ export default function SetTrainingPlanComponent() {
                 <Col className="fw-bold text-light fst-italic">Thursday</Col>
                 <Col className="fw-bold text-light fst-italic">Friday</Col>
                 <Col className="fw-bold text-light fst-italic">Saturday</Col>
-                <Col></Col>
             </Row>
             
             {month.map(week => 
-                <Row className="container-fluid" key={Math.random()}>
-                    <Col></Col>
+                <Row className="container-fluid p-0 m-0" key={Math.random()}>
                     {week.map(day =>
                     <Col className="card" style={{width:"10rem", height:"10rem"}}>
                         <div className="fw-bold text-center">{day.substring(5,10)}</div>
                         {plans.filter(plan => plan.date === day.substring(0,10))
                               .map(plan => 
                               <span key={plan.id} >
-                                <Popup trigger={<button className='btn btn-sm btn-dark bg-gradient'>{plan.title}</button>} position='bottom center'>
+                                <Popup trigger={<button className='btn btn-sm btn-dark bg-gradient plan'>{plan.title}</button>} position='bottom center'>
                                     <div className="card py-2 px-2 bg-dark bg-gradient text-light">
                                         <div className="fst-3 fw-bold text-uppercase">{plan.title}</div>
                                         <div className="fst-6 fst-italic">{plan.details}</div>
@@ -180,11 +177,10 @@ export default function SetTrainingPlanComponent() {
                         }
                     </Col>
                     )}
-                    <Col></Col>
             </Row>)}
         </div>
 
-        <div className="container-fluid d-flex flex-row justify-content-around">
+        <div className="container-fluid d-flex flex-row justify-content-around flex-wrap">
             <div>
                 <Col className="text-center fs-4 fw-bolder my-3" style={{'textShadow': '3px 3px 6px black'}}>Add a plan</Col>
                 <Col>
@@ -207,9 +203,9 @@ export default function SetTrainingPlanComponent() {
                     </div>
                 </Col>
             </div>
-            <div className=" w-50">
+            <div className="">
                 <Row className="justify-content-center font-monospace fs-4 fw-bolder my-3" style={{'textShadow': '3px 3px 3px white'}} >Plan List</Row>
-                <Row>
+                <Row className="weekday">
                     <Col>Date</Col>
                     <Col>Title</Col>
                     <Col>Details</Col>
@@ -223,7 +219,7 @@ export default function SetTrainingPlanComponent() {
                         <Col>{plan.details}</Col>
                         <Col>{plan.completed ? 'Completed' : 'Not Completed'}</Col>
                         <Col>
-                            <Popup trigger={<button className="btn btn-sm btn-dark me-2" > Edit </button> } position='top center'>
+                            <Popup trigger={<button className="btn btn-sm btn-dark me-2" > Edit </button> } position='top left'>
 
                                 <div className="d-flex flex-column p-2 bg-gradient text-light bg-dark rounded-1">
                                     <label>Date</label>

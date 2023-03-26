@@ -3,6 +3,7 @@ import { Nav } from 'react-bootstrap'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useAuth } from './AuthContext'
 import MessageNavbarComponent from './MessageNavbarComponent'
+import { useState } from 'react'
 
 export default function NavBarComponent() {
     // get url
@@ -13,23 +14,35 @@ export default function NavBarComponent() {
 
     const navigate = useNavigate()
 
+    const hideNavbar = () => {
+        let elem = document.getElementById('navbarNavAltMarkup')
+        if (elem.classList.contains('show')){
+            elem.classList.remove('show')
+        }
+    }
+
     const homePage = () => {
+        hideNavbar()
         navigate('/')
     }
 
     const trainersPage = () => {
+        hideNavbar()
         navigate('/trainers')
     }
 
     const loginPage = () => {
+        hideNavbar()
         navigate('/login')
     }
 
     const trainerPage = () => {
+        hideNavbar()
         navigate('/trainer/details')
     }
 
     const customerPage = () => {
+        hideNavbar()
         navigate('/customer/details')
     }
 
@@ -39,14 +52,17 @@ export default function NavBarComponent() {
     }
 
     const manageClientPage = () => {
+        hideNavbar()
         navigate('/trainers/manageclient')
     }
 
     const trainingPlanPage = () => {
+        hideNavbar()
         navigate('/customers/trainingplan')
     }
 
     const messagingPage = () => {
+        hideNavbar()
         if(authContext.role === 'TRAINER'){
             navigate('/messaging')
         } else if (authContext.role === 'CUSTOMER'){
@@ -63,8 +79,8 @@ export default function NavBarComponent() {
                     <span className="navbar-toggler-icon"></span>
                 </button>
                 <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-                    <div className="navbar-nav">
-                        <Nav.Link onClick={homePage} className={location.pathname === '/' ? 'nav-link active fw-bolder text-info' : 'nav-link'} aria-current='page'>Home</Nav.Link>
+                    <div className="navbar-nav" >
+                        <Nav.Link onClick={homePage} className={location.pathname === '/' ? 'nav-link active fw-bolder text-info' : 'nav-link'}>Home</Nav.Link>
                         <Nav.Link onClick={trainersPage} className={location.pathname === '/trainers' ? 'nav-link active fw-bolder text-info' : 'nav-link'} >Our Trainers</Nav.Link>
                         
                         {authContext.role === null ? 

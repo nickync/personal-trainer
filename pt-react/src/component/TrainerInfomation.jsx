@@ -33,14 +33,14 @@ export default function TrainerInformation(){
       }
     
     return(
-        <Container className="container-fluid" style={{height:'80vh'}}>
+        <Container className="container-fluid">
             {trainers.filter(i => i.id === Number(id))
             .map(trainer =>
             <div key={id}>
                 <Row>
                     <Col className="text-center fs-1 text-uppercase text-black-50 fw-bold fst-italic shadow my-2"> {trainer.firstName + " " +trainer.lastName} </Col>
                 </Row>
-                <Row className="my-5 d-flex align-items-center">
+                <Row className="my-5 d-flex align-items-center phoneColumn">
                     <Col><img className="card-img-top" style={{height:'50vh'}} src={trainer.img} alt="profile"/></Col>
                     <Col className='text-center fs-4 fst-italic'>
                         <p><Badge bg='dark'>{trainer.bio}</Badge></p>
