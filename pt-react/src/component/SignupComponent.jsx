@@ -157,10 +157,10 @@ export default function SignupComponent() {
     }
 
   return (
-    <Container>
+    <Container style={{height:"87vh"}}>
         <Form className='fst-italic fw-bold'>
-            <Row>
-                <Col className='col-sm-4 me-5'>
+            <div>
+                <Col className='col-sm-4 mx-auto'>
                     <Form.Group className='mb-2' controlId='username'>
                         <Form.Label>Username {usernameAlert ? <span className='text-danger fw-bolder'>Username has already been used, please use a different one.</span> :''} </Form.Label>
                         <Form.Label>{usernameReq ? <span className='text-danger fw-bolder'>Username needs to be longer than 3.</span> :''} </Form.Label>
@@ -287,7 +287,7 @@ export default function SignupComponent() {
                         ''
                     }
                 </Col>
-            </Row>
+            </div>
             <Row className='text-center my-5'>
                 <Form.Group className='mx-3' controlId='submit'>
                     <Button type='submit' className='btn btn-sm btn-dark text-info px-3' onClick={handleSubmit} disabled={buttonState} >Sign Up</Button>

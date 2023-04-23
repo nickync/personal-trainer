@@ -90,7 +90,7 @@ export default function CustomerDetails() {
   }
 
   return (
-    <Container className='container-fluid mt-5'>
+    <Container className='container-fluid mt-5' style={{height:"83.5vh"}}>
       <Row className='text-end'>
         <Col><button className='btn btn-sm btn-dark' onClick={handleEdit}>Edit</button></Col>
       </Row>

@@ -64,7 +64,7 @@ export default function MessagingComponent() {
     },[message])
 
   return (
-    <div className="container-fluid d-flex chatColumn">
+    <div className="container-fluid justify-content-start d-flex chatColumn" style={{height:"87vh"}}>
         <div className="w-25 text-center mt-4">
             {clients.map(client =>
             <div key={client.id} className=" border-info border text-uppercase">
@@ -74,9 +74,9 @@ export default function MessagingComponent() {
         </div>
         {displayMsg ?
             <div className="w-75 text-center" >
-                <div className="mt-1 fs-5 shadow-sm text-light" >Message History</div>
+                {/* <div className="mt-1 fs-5 shadow-sm text-light" >Message History</div> */}
                 {message.length === 0 ? <div>You dont have any message yet.</div> : ""}
-                <div className="w-100 mx-auto overflow-y-scroll m-1 border d-flex flex-column" style={{maxHeight:'30rem'}}>
+                <div className="w-100 mx-auto overflow-y-scroll m-1 border-light d-flex flex-column" style={{maxHeight:'30rem'}}>
                     {message.map(msg => 
                         <Row key={msg.id} className={`w-75 rounded-5 p-2 m-1 text-start bg-gradient ${msg.sender === 'Trainer' ? "bg-light" : "justify-content-end align-self-end bg-info-subtle"}`}>{msg.message}</Row>
                         )}

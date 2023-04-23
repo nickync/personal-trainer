@@ -24,7 +24,7 @@ export default function ManageClientComponent() {
     }
 
   return (
-    <div className="container-fluid d-flex justify-content-center text-center flex-column">
+    <div className="container-fluid d-flex justify-content-start text-center flex-column" style={{height:"87vh"}}>
         <div>
             <h2 className="fst-italic">Your clients</h2>
         </div>
@@ -37,7 +37,7 @@ export default function ManageClientComponent() {
                         <p className="card-text">{client.goal}</p>
                         <p className='card-text'>{client.height}</p>
                         <p className='card-text'>{client.weight}</p>
-                        <button className="btn btn-primary" onClick={() => setTrainingPlan(client.id)}>Customize plan</button>
+                        <button className="btn btn-info bg-gradient btn-sm" onClick={() => setTrainingPlan(client.id)}>Customize plan</button>
                     </div>
                 </div>
             )}

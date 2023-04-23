@@ -33,7 +33,7 @@ export default function TrainerInformation(){
       }
     
     return(
-        <Container className="container-fluid">
+        <Container className="container-fluid" style={{height:"87vh"}}>
             {trainers.filter(i => i.id === Number(id))
             .map(trainer =>
             <div key={id}>

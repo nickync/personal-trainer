@@ -86,9 +86,9 @@ export default function CustomerMessagingComponent() {
     <div>
         {
             noHistory ? 
-                <div className="fs-3 text-center">You have no message history.</div>
+                <div className="fs-3 text-center" style={{height:"87vh"}}>You have no message history.</div>
             :
-            <div className="container-fluid d-flex chatColumn">
+            <div className="container-fluid d-flex chatColumn" style={{height:"87vh"}}>
                 <div className="w-25 text-center mt-4">
                     <div key={trainerId} className=" border-info border text-uppercase">
                         <button className="text-uppercase fst-italic btn btn-lg bg-light w-100 rounded-0" onClick={() => getMessage(trainer.id, authContext.id)}>{trainer.firstName + " " + trainer.lastName}</button>

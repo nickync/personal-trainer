@@ -10,7 +10,7 @@ export default function ErrorComponent(){
     }
 
     return (
-        <Container className="text-center">
+        <Container className="text-center" style={{height:"87vh"}}>
             <Row className="mt-5">
                 <Col className="fs-3 my-5">This page is no longer available. Try searching for what you’re looking for or explore the bottom of the page.</Col>
             </Row>

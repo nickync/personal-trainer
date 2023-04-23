@@ -43,7 +43,7 @@ export default function TrainerDetails() {
   }
 
   return (
-    <Container className='mt-5'>
+    <Container className='mt-5' style={{height:"87vh"}}>
       <Row className='text-end'>
         <Col><button onClick={handleEdit} className='btn btn-sm btn-dark'>Edit</button></Col>
       </Row>

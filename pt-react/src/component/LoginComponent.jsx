@@ -74,7 +74,7 @@ export default function LoginComponent() {
     }
 
   return (
-    <div className='container-fluid text-center'>
+    <div className='container-fluid text-center' style={{height:"87vh"}}>
         <div className='row text-center'>
             <div className='text-gray fw-bolder fs-4'>Welcome back!</div>
         </div>

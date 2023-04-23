@@ -142,7 +142,7 @@ export default function SetTrainingPlanComponent() {
     }
 
   return (
-    <div className="container-fluid">
+    <div className="container-fluid" style={{height:"87vh"}}>
         <h2 className="text-center font-monospace fs-2 fw-bolder my-3" style={{'textShadow': '3px 3px 9px white'}}>Training Plan</h2>
         <div className="text-center">
             <Row>
