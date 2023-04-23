@@ -157,7 +157,7 @@ export default function SignupComponent() {
     }
 
   return (
-    <Container style={{height:"87vh"}}>
+    <Container className='vh-100'>
         <Form className='fst-italic fw-bold'>
             <div>
                 <Col className='col-sm-4 mx-auto'>

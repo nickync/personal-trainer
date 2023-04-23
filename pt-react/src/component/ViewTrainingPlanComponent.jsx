@@ -83,7 +83,7 @@ export default function ViewTrainingPlanComponent(){
         getAllPlans()
     },[customer])
     return(
-        <div className="container-fluid" style={{height:"87vh"}}>
+        <div className="container-fluid">
             <h2 className="text-center font-monospace fs-2 fw-bolder my-3" style={{'textShadow': '3px 3px 9px white'}}>Training Plan</h2>
             <div className="text-center">
                 <Row>

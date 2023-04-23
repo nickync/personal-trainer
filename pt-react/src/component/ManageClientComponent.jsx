@@ -24,7 +24,7 @@ export default function ManageClientComponent() {
     }
 
   return (
-    <div className="container-fluid d-flex justify-content-start text-center flex-column" style={{height:"87vh"}}>
+    <div className="container-fluid d-flex justify-content-start text-center flex-column vh-100">
         <div>
             <h2 className="fst-italic">Your clients</h2>
         </div>
