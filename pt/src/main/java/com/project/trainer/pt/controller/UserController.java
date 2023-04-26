@@ -18,7 +18,7 @@ public class UserController {
     public SysUser createUser(@RequestBody SysUser user){
         System.out.println(user.getUsername());
         SysUser sysUser = userRepository.save(user);
-        jwtSecurityConfig.createNewUser(user, jwtSecurityConfig.dataSource());
+//        jwtSecurityConfig.createNewUser(user, jwtSecurityConfig.dataSource());
         return sysUser;
     }
 

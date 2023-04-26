@@ -5,14 +5,10 @@ import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
-import com.project.trainer.pt.model.SysUser;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -23,20 +19,14 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.annotation.web.configurers.oauth2.server.resource.OAuth2ResourceServerConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.jdbc.JdbcDaoImpl;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.jwt.JwtEncoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtEncoder;
-import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
 
-import javax.sql.DataSource;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.interfaces.RSAPublicKey;
@@ -116,42 +106,42 @@ public class JwtSecurityConfig {
         return new ProviderManager(authenticationProvider);
     }
 
-    @Bean
-    public DataSource dataSource(){
-        return new EmbeddedDatabaseBuilder()
-                .setType(EmbeddedDatabaseType.H2)
-                .addScript(JdbcDaoImpl.DEFAULT_USER_SCHEMA_DDL_LOCATION)
-                .build();
-    }
-    @Bean
-    public UserDetailsService userDetailsService(DataSource dataSource){
-        PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-        var user = User.withUsername("customer")
-                .password(encoder.encode("1"))
-//        https://www.baeldung.com/spring-security-5-default-password-encoder
-//                .passwordEncoder(str -> passwordEncoder().encode(str))
-                .roles("CUSTOMER")
-                .build();
-        var trainer = User.withUsername("trainer")
-                .password(encoder.encode("1"))
-                .roles("TRAINER")
-                .build();
+//    @Bean
+//    public DataSource dataSource(){
+//        return new EmbeddedDatabaseBuilder()
+//                .setType(EmbeddedDatabaseType.H2)
+//                .addScript(JdbcDaoImpl.DEFAULT_USER_SCHEMA_DDL_LOCATION)
+//                .build();
+//    }
+//    @Bean
+//    public UserDetailsService userDetailsService(DataSource dataSource){
+//        PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+//        var user = User.withUsername("customer")
+//                .password(encoder.encode("1"))
+////        https://www.baeldung.com/spring-security-5-default-password-encoder
+////                .passwordEncoder(str -> passwordEncoder().encode(str))
+//                .roles("CUSTOMER")
+//                .build();
+//        var trainer = User.withUsername("trainer")
+//                .password(encoder.encode("1"))
+//                .roles("TRAINER")
+//                .build();
+//
+//        var jdbcUserDetailsManager = new JdbcUserDetailsManager(dataSource);
+//        jdbcUserDetailsManager.createUser(user);
+//        jdbcUserDetailsManager.createUser(trainer);
+//        return jdbcUserDetailsManager;
+//    }
 
-        var jdbcUserDetailsManager = new JdbcUserDetailsManager(dataSource);
-        jdbcUserDetailsManager.createUser(user);
-        jdbcUserDetailsManager.createUser(trainer);
-        return jdbcUserDetailsManager;
-    }
-
-    public void createNewUser(SysUser user, @Autowired DataSource dataSource){
-
-        PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-        var newUser = User.withUsername(user.getUsername())
-                .password(encoder.encode(user.getPassword()))
-                .roles(user.getRole())
-                .build();
-
-        var jdbcUserDetailsManager = new JdbcUserDetailsManager(dataSource);
-        jdbcUserDetailsManager.createUser(newUser);
-    }
+//    public void createNewUser(SysUser user, @Autowired DataSource dataSource){
+//
+//        PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+//        var newUser = User.withUsername(user.getUsername())
+//                .password(encoder.encode(user.getPassword()))
+//                .roles(user.getRole())
+//                .build();
+//
+//        var jdbcUserDetailsManager = new JdbcUserDetailsManager(dataSource);
+//        jdbcUserDetailsManager.createUser(newUser);
+//    }
 }
