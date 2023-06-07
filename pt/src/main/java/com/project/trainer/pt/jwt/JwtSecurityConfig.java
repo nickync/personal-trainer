@@ -108,11 +108,18 @@ public class JwtSecurityConfig {
 
 //    @Bean
 //    public DataSource dataSource(){
-//        return new EmbeddedDatabaseBuilder()
-//                .setType(EmbeddedDatabaseType.H2)
-//                .addScript(JdbcDaoImpl.DEFAULT_USER_SCHEMA_DDL_LOCATION)
-//                .build();
+////        return new EmbeddedDatabaseBuilder()
+////                .setType(EmbeddedDatabaseType.H2)
+////                .addScript(JdbcDaoImpl.DEFAULT_USER_SCHEMA_DDL_LOCATION)
+////                .build();
+//        PGSimpleDataSource ds = new PGSimpleDataSource();
+//        ds.setKerberosServerName("dpg-ch47jess3fvjtib61egg-a");
+//        ds.setDatabaseName("trainerdata");
+//        ds.setUser("traineruser");
+//        ds.setPassword("JKLbMEpVtx7FmpqkqdKeVCtnrsqdaap8");
+//        return ds;
 //    }
+//
 //    @Bean
 //    public UserDetailsService userDetailsService(DataSource dataSource){
 //        PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
@@ -132,7 +139,7 @@ public class JwtSecurityConfig {
 //        jdbcUserDetailsManager.createUser(trainer);
 //        return jdbcUserDetailsManager;
 //    }
-
+//
 //    public void createNewUser(SysUser user, @Autowired DataSource dataSource){
 //
 //        PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
